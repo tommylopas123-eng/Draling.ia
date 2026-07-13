@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Estudio C — Aprendizaje organizacional de próxima generación</title>
+<meta name="description" content="Consultora de aprendizaje organizacional. Combinamos estrategia, pedagogía y tecnología para transformar cómo aprende tu organización. Hablemos." />
+<style>
+  :root{
+    --paper:#FBFBFC; --panel:#F4F5F7; --ink:#10131A; --slate:#55606F;
+    --slate-2:#727B8A; --line:#E7E9EE; --line-2:#DFE2E8;
+    --red:#E11B22; --red-700:#B4141A; --red-tint:#FBECEC;
+    --night:#0C0F17; --night-2:#151A25; --night-line:#242B39; --on-night:#9AA3B4;
+    --wrap:1180px; --r:16px;
+    --f:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--f);
+    line-height:1.75;-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--red);color:#fff}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+  /* ---------- Tipografía ---------- */
+  h1,h2,h3{letter-spacing:-.03em;line-height:1.04;text-wrap:balance;font-weight:800}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--slate-2);
+  }
+  .lead{color:var(--slate);font-size:clamp(16px,2.1vw,19px)}
+
+  /* ---------- Botones / links (ROJO = acción) ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;
+    padding:14px 26px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:background .18s,color .18s,transform .18s,border-color .18s;
+    line-height:1;letter-spacing:-.01em;
+  }
+  .btn--primary{background:var(--red);color:#fff}
+  .btn--primary:hover{background:var(--red-700);transform:translateY(-1px)}
+  .btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+  .btn--ghost:hover{border-color:var(--ink)}
+  .btn--white{background:#fff;color:var(--red)}
+  .btn--white:hover{background:#fff;transform:translateY(-1px)}
+  .tlink{
+    display:inline-flex;align-items:center;gap:6px;color:var(--red);font-weight:700;
+    font-size:15px;letter-spacing:-.01em;
+  }
+  .tlink svg{transition:transform .18s}
+  .tlink:hover svg{transform:translateX(4px)}
+  .btn svg,.tlink svg{width:16px;height:16px;flex:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:60;background:rgba(251,251,252,.82);
+    backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:18px}
+  .brand .mark{
+    width:34px;height:34px;border-radius:9px;background:var(--ink);color:#fff;
+    display:grid;place-items:center;font-size:17px;font-weight:800;letter-spacing:-.04em;
+  }
+  .brand .mark b{color:var(--red)}
+  .menu{display:flex;align-items:center;gap:34px;list-style:none}
+  .menu a{font-size:15px;color:var(--slate);font-weight:500;transition:color .16s}
+  .menu a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:14px}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;transition:.2s}
+
+  /* ---------- Secciones ---------- */
+  section{padding:clamp(72px,10vw,128px) 0}
+  .sec-head{max-width:720px;margin:0 auto 64px;text-align:center}
+  .sec-head h2{font-size:clamp(30px,5vw,46px)}
+  .sec-head .lead{margin-top:18px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(64px,9vw,120px) 0 clamp(56px,7vw,96px);position:relative;overflow:hidden}
+  .hero:before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(120% 90% at 88% -10%, var(--red-tint) 0%, rgba(251,236,236,0) 55%),
+      linear-gradient(180deg,#fff 0%,var(--paper) 100%);
+  }
+  .hero .eyebrow{
+    display:inline-block;background:var(--red-tint);color:var(--red-700);
+    padding:8px 16px;border-radius:999px;letter-spacing:.13em;
+  }
+  .hero h1{font-size:clamp(40px,7.4vw,84px);margin:26px 0 0;max-width:14ch}
+  .hero h1 em{color:var(--red);font-style:normal}
+  .hero .lead{margin-top:26px;max-width:52ch}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .hero-metrics{
+    display:flex;flex-wrap:wrap;gap:36px;margin-top:56px;padding-top:34px;
+    border-top:1px solid var(--line);
+  }
+  .metric b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em}
+  .metric span{font-size:13px;color:var(--slate-2);letter-spacing:.02em}
+
+  /* ---------- Grid pilares (numerado) ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .pillar{
+    border:1px solid var(--line);border-radius:var(--r);padding:30px 26px 32px;
+    background:#fff;transition:border-color .2s,transform .2s,box-shadow .2s;
+  }
+  .pillar:hover{border-color:var(--line-2);transform:translateY(-4px);box-shadow:0 22px 44px -30px rgba(16,19,26,.4)}
+  .pnum{
+    font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--slate-2);
+    padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line);
+    display:block;
+  }
+  .pillar h3{font-size:19px;letter-spacing:-.02em}
+  .pillar p{margin-top:12px;color:var(--slate);font-size:14.5px}
+
+  /* ---------- Detalle de servicio ---------- */
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,88px);align-items:center}
+  .svc + .svc{margin-top:clamp(64px,8vw,104px)}
+  .svc.rev .svc-media{order:2}
+  .svc-kicker{display:flex;align-items:baseline;gap:14px}
+  .svc-kicker .n{font-size:15px;font-weight:800;color:var(--red);letter-spacing:.04em}
+  .svc h3{font-size:clamp(26px,3.6vw,36px);margin-top:2px}
+  .svc .sub{color:var(--slate-2);font-weight:600;margin-top:10px;font-size:15px;letter-spacing:.01em}
+  .svc p.desc{color:var(--slate);margin-top:16px;max-width:46ch}
+  .olist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px}
+  .olist li{display:flex;gap:16px;align-items:baseline}
+  .olist .idx{
+    font-size:13px;font-weight:800;color:var(--ink);min-width:22px;
+    font-variant-numeric:tabular-nums;letter-spacing:.02em;
+  }
+  .olist span.t{color:var(--ink);font-size:15.5px}
+  .svc-media{
+    aspect-ratio:4/3;border-radius:20px;position:relative;overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .svc-media .mono{
+    position:absolute;right:22px;bottom:14px;font-size:66px;font-weight:800;
+    letter-spacing:-.05em;color:rgba(255,255,255,.16);
+  }
+  .m1{background:linear-gradient(135deg,#1b2231,#0c0f17)}
+  .m2{background:linear-gradient(135deg,#2a3040,#141824)}
+  .m3{background:linear-gradient(135deg,#3a1216,#12060a)}
+  .m4{background:linear-gradient(135deg,#1e2634,#0e1119)}
+  .svc-media:after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.4px);
+    background-size:26px 26px;mix-blend-mode:screen;
+  }
+
+  /* ---------- Por qué (banda oscura) ---------- */
+  .why{background:var(--night);color:#fff}
+  .why .inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(44px,6vw,88px);align-items:center}
+  .why h2{font-size:clamp(30px,4.6vw,44px)}
+  .reasons{margin-top:36px;display:flex;flex-direction:column;gap:30px}
+  .reason{display:grid;grid-template-columns:44px 1fr;gap:20px}
+  .reason .rn{
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--night-line);
+    display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;
+  }
+  .reason h4{font-size:18px;letter-spacing:-.02em;font-weight:700}
+  .reason p{color:var(--on-night);margin-top:6px;font-size:15px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .stat{
+    background:var(--night-2);border:1px solid var(--night-line);border-radius:16px;
+    padding:26px 24px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  .stat b{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat span{color:var(--on-night);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+  .stat.accent{background:var(--red);border-color:var(--red)}
+  .stat.accent span{color:rgba(255,255,255,.85)}
+  .stat.tall{min-height:210px}
+
+  /* ---------- Nosotros ---------- */
+  .about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,80px);align-items:center}
+  .about h2{font-size:clamp(30px,4.8vw,46px)}
+  .about p{color:var(--slate);margin-top:20px}
+  .about-media{
+    aspect-ratio:5/4;border-radius:20px;overflow:hidden;position:relative;
+    background:linear-gradient(135deg,#20283a,#0c0f17);border:1px solid var(--line);
+  }
+  .about-media:after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.4px);
+    background-size:24px 24px;
+  }
+  .about-media .mono{position:absolute;left:26px;bottom:18px;font-size:80px;font-weight:800;letter-spacing:-.05em;color:rgba(255,255,255,.14)}
+
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:76px}
+  .value{padding:26px 22px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+  .value .vn{font-size:13px;font-weight:800;color:var(--slate-2);letter-spacing:.06em}
+  .value h4{margin-top:14px;font-size:17px;letter-spacing:-.02em;font-weight:700}
+  .value p{margin-top:8px;color:var(--slate);font-size:14px}
+  .about-quote{max-width:760px;margin:88px auto 0;text-align:center}
+  .about-quote h3{font-size:clamp(24px,3.6vw,34px)}
+  .about-quote p{margin-top:18px;color:var(--slate)}
+
+  /* ---------- Casos ---------- */
+  .cases{background:var(--panel)}
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .case{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+  .case:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(16,19,26,.5)}
+  .case-top{height:150px;position:relative;overflow:hidden}
+  .case-top.c1{background:linear-gradient(135deg,#3a1216,#140609)}
+  .case-top.c2{background:linear-gradient(135deg,#20283a,#0c0f17)}
+  .case-top.c3{background:linear-gradient(135deg,#2a3040,#141824)}
+  .case-top:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.4px);background-size:22px 22px}
+  .case-tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(255,255,255,.94);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.04em;padding:6px 11px;border-radius:999px}
+  .case-body{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
+  .case-body .org{font-size:12.5px;color:var(--slate-2);letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+  .case-body h3{font-size:20px;margin-top:8px;letter-spacing:-.02em}
+  .case-body p{color:var(--slate);font-size:14.5px;margin-top:12px}
+  .kpis{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px;padding-top:18px;border-top:1px solid var(--line)}
+  .kpis li{display:flex;gap:11px;font-size:14px;color:var(--ink);align-items:baseline}
+  .kpis .dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex:none;transform:translateY(-2px)}
+
+  /* ---------- CTA final ---------- */
+  .cta-final{padding:clamp(72px,9vw,120px) 0}
+  .cta-box{
+    background:var(--red);border-radius:28px;padding:clamp(48px,7vw,88px) 28px;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .cta-box:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.4px);background-size:26px 26px}
+  .cta-box>*{position:relative}
+  .cta-box h2{color:#fff;font-size:clamp(30px,5vw,52px);max-width:16ch;margin:0 auto}
+  .cta-box p{color:rgba(255,255,255,.9);margin:20px auto 0;max-width:52ch}
+  .cta-box .btn{margin-top:36px}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--night);color:#fff;padding:80px 0 34px}
+  .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px}
+  .foot .brand{color:#fff}
+  .foot .brand .mark{background:#fff;color:var(--ink)}
+  .foot p.desc{color:var(--on-night);margin-top:18px;font-size:14px;max-width:30ch}
+  .foot h5{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-weight:700;margin-bottom:18px}
+  .foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot ul a{color:var(--on-night);font-size:14.5px;transition:color .16s}
+  .foot ul a:hover{color:#fff}
+  .foot .contact li{color:var(--on-night);font-size:14.5px;line-height:1.6}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:56px;padding-top:26px;border-top:1px solid var(--night-line)}
+  .foot-bottom p,.foot-bottom a{color:var(--slate-2);font-size:13px}
+  .foot-bottom a:hover{color:#fff}
+
+  /* ---------- Reveal ---------- */
+  .rev{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .rev.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rev{opacity:1;transform:none;transition:none}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:960px){
+    .pillars{grid-template-columns:repeat(2,1fr)}
+    .values{grid-template-columns:repeat(2,1fr)}
+    .case-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .why .inner,.about{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:720px){
+    .menu,.nav-cta .btn{display:none}
+    .burger{display:block}
+    .menu.open{
+      display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;
+      background:var(--paper);border-bottom:1px solid var(--line);padding:18px 24px;gap:18px;
+    }
+    .menu.open a{color:var(--ink)}
+    .svc{grid-template-columns:1fr;gap:34px}
+    .svc.rev2 .svc-media,.svc .svc-media{order:-1}
+    .hero-metrics{gap:26px}
+    .foot{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio" aria-label="Estudio C — inicio">
+      <span class="mark">e<b>.</b></span> Estudio C
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#casos">Casos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn--primary" href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20soluci%C3%B3n%20de%20aprendizaje%20para%20mi%20organizaci%C3%B3n." target="_blank" rel="noopener">Hablemos</a>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <span class="eyebrow">Aprendizaje organizacional de próxima generación</span>
+    <h1>No diseñamos cursos, <em>transformamos</em> cómo aprende tu organización.</h1>
+    <p class="lead">Combinamos estrategia, pedagogía y tecnología para crear soluciones de aprendizaje que cambian comportamientos y mueven los indicadores del negocio.</p>
+    <div class="hero-cta">
+      <a class="btn btn--primary" href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20soluci%C3%B3n%20de%20aprendizaje%20para%20mi%20organizaci%C3%B3n." target="_blank" rel="noopener">
+        Hablemos por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="#servicios">Ver servicios</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric"><b>+100</b><span>Proyectos estratégicos</span></div>
+      <div class="metric"><b>50k+</b><span>Personas formadas</span></div>
+      <div class="metric"><b>15+</b><span>Años de experiencia</span></div>
+      <div class="metric"><b>98%</b><span>Satisfacción de clientes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PILARES ================= -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <h2>Soluciones que evolucionan con tu equipo</h2>
+      <p class="lead">Abordamos el aprendizaje desde cuatro pilares para garantizar una transformación integral.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar rev">
+        <span class="pnum">01 / Pilar</span>
+        <h3>Learning Strategy &amp; Design</h3>
+        <p>Definimos el norte estratégico de tu ecosistema de aprendizaje. No solo diseñamos contenidos: creamos experiencias que impactan en el negocio.</p>
+      </article>
+      <article class="pillar rev">
+        <span class="pnum">02 / Pilar</span>
+        <h3>eLearning Studio</h3>
+        <p>Producción de contenidos de alto impacto visual y pedagógico. Del storytelling a la interactividad, convertimos el conocimiento en experiencias memorables.</p>
+      </article>
+      <article class="pillar rev">
+        <span class="pnum">03 / Pilar</span>
+        <h3>AI &amp; Future Skills</h3>
+        <p>Preparamos a tu equipo para el mañana. Implementación de IA en procesos de aprendizaje y desarrollo de las habilidades críticas de la era digital.</p>
+      </article>
+      <article class="pillar rev">
+        <span class="pnum">04 / Pilar</span>
+        <h3>Learning Operations</h3>
+        <p>Optimizamos la gestión del aprendizaje. Tecnología, procesos y métricas para que tu área de L&amp;D funcione con la eficiencia de una startup.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DETALLE SERVICIOS ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+
+    <div class="svc rev">
+      <div>
+        <div class="svc-kicker"><span class="n">01</span></div>
+        <h3>Learning Strategy &amp; Design</h3>
+        <p class="sub">El mapa para tu éxito organizacional</p>
+        <p class="desc">No empezamos por el contenido, empezamos por el problema. Analizamos las brechas de desempeño y diseñamos una estrategia de aprendizaje alineada con los objetivos de negocio.</p>
+        <ul class="olist">
+          <li><span class="idx">01</span><span class="t">Auditoría de ecosistemas de aprendizaje</span></li>
+          <li><span class="idx">02</span><span class="t">Diseño de mallas curriculares y rutas de aprendizaje</span></li>
+          <li><span class="idx">03</span><span class="t">Consultoría en cultura de aprendizaje</span></li>
+          <li><span class="idx">04</span><span class="t">Medición de impacto y ROI de formación</span></li>
+        </ul>
+      </div>
+      <div class="svc-media m1"><span class="mono">01</span></div>
+    </div>
+
+    <div class="svc rev rev2">
+      <div class="svc-media m2"><span class="mono">02</span></div>
+      <div>
+        <div class="svc-kicker"><span class="n">02</span></div>
+        <h3>eLearning Studio</h3>
+        <p class="sub">Contenidos que cautivan y enseñan</p>
+        <p class="desc">Transformamos información técnica o compleja en experiencias digitales fluidas, estéticas y altamente pedagógicas. Usamos el storytelling para conectar emocionalmente con el aprendiz.</p>
+        <ul class="olist">
+          <li><span class="idx">01</span><span class="t">Producción de cursos multimedia interactivos</span></li>
+          <li><span class="idx">02</span><span class="t">Video learning y micro-learning</span></li>
+          <li><span class="idx">03</span><span class="t">Gamificación y simulaciones</span></li>
+          <li><span class="idx">04</span><span class="t">Diseño instruccional de alto nivel</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc rev">
+      <div>
+        <div class="svc-kicker"><span class="n">03</span></div>
+        <h3>AI &amp; Future Skills</h3>
+        <p class="sub">Liderando la frontera tecnológica</p>
+        <p class="desc">La IA no es el futuro, es el presente. Ayudamos a las organizaciones a integrar la Inteligencia Artificial en sus flujos de trabajo y a desarrollar las habilidades necesarias para colaborar con ella.</p>
+        <ul class="olist">
+          <li><span class="idx">01</span><span class="t">Workshops de IA generativa para equipos</span></li>
+          <li><span class="idx">02</span><span class="t">Implementación de tutores inteligentes y chatbots</span></li>
+          <li><span class="idx">03</span><span class="t">Curaduría de contenidos asistida por IA</span></li>
+          <li><span class="idx">04</span><span class="t">Programas de reskilling y upskilling digital</span></li>
+        </ul>
+      </div>
+      <div class="svc-media m3"><span class="mono">03</span></div>
+    </div>
+
+    <div class="svc rev rev2">
+      <div class="svc-media m4"><span class="mono">04</span></div>
+      <div>
+        <div class="svc-kicker"><span class="n">04</span></div>
+        <h3>Learning Operations</h3>
+        <p class="sub">Escalabilidad y eficiencia operativa</p>
+        <p class="desc">Hacemos que la gestión del aprendizaje sea invisible y eficiente. Optimizamos tus plataformas (LMS/LXP) y procesos para que puedas enfocarte en lo que importa: las personas.</p>
+        <ul class="olist">
+          <li><span class="idx">01</span><span class="t">Selección e implementación de LMS/LXP</span></li>
+          <li><span class="idx">02</span><span class="t">Automatización de procesos de formación</span></li>
+          <li><span class="idx">03</span><span class="t">Dashboards de analítica de aprendizaje</span></li>
+          <li><span class="idx">04</span><span class="t">Gestión de proveedores y contenidos</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= POR QUÉ ================= -->
+<section class="why">
+  <div class="wrap inner">
+    <div class="rev">
+      <h2>¿Por qué elegir Estudio&nbsp;C?</h2>
+      <div class="reasons">
+        <div class="reason">
+          <div class="rn">01</div>
+          <div>
+            <h4>Foco en resultados, no en minutos</h4>
+            <p>No medimos el éxito por la duración de un curso, sino por el cambio de comportamiento y el impacto en los KPIs de tu organización.</p>
+          </div>
+        </div>
+        <div class="reason">
+          <div class="rn">02</div>
+          <div>
+            <h4>Pedagogía de vanguardia</h4>
+            <p>Aplicamos neurociencia y metodologías ágiles para que el aprendizaje sea efectivo, rápido y duradero.</p>
+          </div>
+        </div>
+        <div class="reason">
+          <div class="rn">03</div>
+          <div>
+            <h4>Tecnología con propósito</h4>
+            <p>Usamos IA y herramientas digitales para potenciar la experiencia humana, nunca para reemplazarla.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats rev">
+      <div class="stat"><b>98%</b><span>Satisfacción de clientes</span></div>
+      <div class="stat"><b>50k+</b><span>Personas formadas</span></div>
+      <div class="stat accent tall"><b>15+</b><span>Años de experiencia</span></div>
+      <div class="stat"><b>24/7</b><span>Soporte estratégico</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOSOTROS ================= -->
+<section id="nosotros">
+  <div class="wrap">
+    <div class="about">
+      <div class="rev">
+        <span class="eyebrow">Nosotros</span>
+        <h2 style="margin-top:14px">Reimaginando el aprendizaje para la era de la IA.</h2>
+        <p>Estudio C nació con una misión clara: cerrar la brecha entre el potencial de las personas y las necesidades cambiantes de las organizaciones.</p>
+        <p>Somos un equipo multidisciplinario de pedagogos, diseñadores, tecnólogos y estrategas apasionados por crear experiencias que transforman mentes y negocios. Creemos que el aprendizaje es la ventaja competitiva más sostenible de cualquier organización.</p>
+      </div>
+      <div class="about-media rev"><span class="mono">e.</span></div>
+    </div>
+
+    <div class="values">
+      <div class="value rev"><span class="vn">01</span><h4>Propósito humano</h4><p>La tecnología es el medio, pero el desarrollo de las personas es siempre el fin último.</p></div>
+      <div class="value rev"><span class="vn">02</span><h4>Innovación pragmática</h4><p>No perseguimos tendencias por moda. Implementamos lo que realmente genera valor y resultados.</p></div>
+      <div class="value rev"><span class="vn">03</span><h4>Colaboración radical</h4><p>Trabajamos como una extensión de tu equipo, no como un proveedor externo.</p></div>
+      <div class="value rev"><span class="vn">04</span><h4>Agilidad pedagógica</h4><p>Iteramos rápido para que el aprendizaje acompañe la velocidad del negocio.</p></div>
+    </div>
+
+    <div class="about-quote rev">
+      <h3>No vendemos cursos estándar. Diseñamos soluciones de transformación.</h3>
+      <p>En un mundo donde la información abunda, lo que falta es sentido y aplicación. En Estudio C nos enfocamos en que el conocimiento se convierta en habilidad, y la habilidad en impacto real para tu organización.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASOS ================= -->
+<section class="cases" id="casos">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <h2>Casos de Éxito</h2>
+      <p class="lead">Proyectos que demuestran cómo una estrategia de aprendizaje bien ejecutada puede transformar una organización.</p>
+    </div>
+    <div class="case-grid">
+      <article class="case rev">
+        <div class="case-top c1"><span class="case-tag">AI &amp; Future Skills</span></div>
+        <div class="case-body">
+          <span class="org">Banco Regional Líder</span>
+          <h3>Transformación Digital en Banca</h3>
+          <p>Diseñamos un programa de reskilling masivo para 5.000 colaboradores, integrando IA generativa en sus procesos de atención al cliente y back-office.</p>
+          <ul class="kpis">
+            <li><span class="dot"></span>+40% de eficiencia operativa</li>
+            <li><span class="dot"></span>92% de tasa de adopción</li>
+            <li><span class="dot"></span>-30% en tiempo de respuesta</li>
+          </ul>
+        </div>
+      </article>
+      <article class="case rev">
+        <div class="case-top c2"><span class="case-tag">Learning Operations</span></div>
+        <div class="case-body">
+          <span class="org">Tech Multinacional</span>
+          <h3>Ecosistema de Aprendizaje Global</h3>
+          <p>Implementación de un LXP centralizado para 12 países, unificando la cultura de aprendizaje y optimizando costos de licencias.</p>
+          <ul class="kpis">
+            <li><span class="dot"></span>Unificación de 12 plataformas</li>
+            <li><span class="dot"></span>-25% en costos operativos</li>
+            <li><span class="dot"></span>Acceso 24/7 multiplataforma</li>
+          </ul>
+        </div>
+      </article>
+      <article class="case rev">
+        <div class="case-top c3"><span class="case-tag">Learning Strategy &amp; Design</span></div>
+        <div class="case-body">
+          <span class="org">Retail Group</span>
+          <h3>Academia de Liderazgo Híbrido</h3>
+          <p>Creación de una ruta de formación para mandos medios enfocada en la gestión de equipos remotos y el bienestar organizacional.</p>
+          <ul class="kpis">
+            <li><span class="dot"></span>Mejora del 15% en clima laboral</li>
+            <li><span class="dot"></span>100% de líderes capacitados</li>
+            <li><span class="dot"></span>Contenidos 100% mobile-first</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="cta-final" id="contacto">
+  <div class="wrap">
+    <div class="cta-box rev">
+      <h2>¿Listo para elevar el nivel de aprendizaje en tu empresa?</h2>
+      <p>Hablemos sobre tus desafíos y diseñemos juntos una solución que mueva la aguja de tu negocio.</p>
+      <a class="btn btn--white" href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20quiero%20agendar%20la%20consultor%C3%ADa%20gratuita." target="_blank" rel="noopener">
+        Agenda una consultoría gratuita
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="brand"><span class="mark">e<b>.</b></span> Estudio C</span>
+        <p class="desc">Consultoría estratégica en aprendizaje organizacional. Transformamos el talento a través de la pedagogía, la tecnología y el diseño.</p>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#servicios">Learning Strategy &amp; Design</a></li>
+          <li><a href="#servicios">eLearning Studio</a></li>
+          <li><a href="#servicios">AI &amp; Future Skills</a></li>
+          <li><a href="#servicios">Learning Operations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Compañía</h5>
+        <ul>
+          <li><a href="#nosotros">Sobre nosotros</a></li>
+          <li><a href="#casos">Casos de éxito</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul class="contact">
+          <li>Buenos Aires, Argentina · Disponibilidad global</li>
+          <li><a href="mailto:capacitacion.estudio.c@gmail.com">capacitacion.estudio.c@gmail.com</a></li>
+          <li><a href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp +54 9 11 2277-9725</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© <span id="year">2026</span> Estudio C. Todos los derechos reservados.</p>
+      <div style="display:flex;gap:22px">
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Año
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menú mobile
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  });
+
+  // Reveal on scroll
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.rev').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
