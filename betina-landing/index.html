@@ -532,56 +532,167 @@ body::before{
 :root[data-theme="dark"] .footer-bottom em,
 @media (prefers-color-scheme: dark){.footer-bottom em{color:var(--persimmon)}}
 
-/* ─────────────────────────────  MODAL (dish detail)  ───────────────────────────── */
-.modal-backdrop{
-  position:fixed;inset:0;background:color-mix(in oklab, var(--ink) 60%, transparent);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80;
-  display:flex;align-items:center;justify-content:center;padding:20px;
+/* ─────────────────────────────  DISH DETAIL VIEW (full page)  ───────────────────────────── */
+[hidden]{display:none !important}
+
+.dish-view{padding:0 0 clamp(60px, 8vw, 100px)}
+.dish-view .breadcrumb{
+  padding: 24px 0 8px;font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;
 }
-.modal-backdrop.open{opacity:1;pointer-events:auto}
-.modal{
-  background:var(--ground);border:1px solid var(--hair);border-radius:24px;
-  width:min(680px, 100%);max-height:calc(100vh - 40px);overflow:auto;
-  transform:translateY(20px) scale(.96);transition:transform .35s cubic-bezier(.22,1,.36,1);
-  box-shadow: 0 40px 80px color-mix(in oklab, var(--ink) 50%, transparent);
-  position:relative;
+.dish-view .breadcrumb a{color:var(--muted);transition:color .2s ease}
+.dish-view .breadcrumb a:hover{color:var(--ink)}
+.dish-view .breadcrumb .sep{color:var(--hair)}
+.dish-view .breadcrumb .cur{color:var(--ink);font-weight:600}
+
+.dish-hero{
+  padding: clamp(40px, 5vw, 80px) 0 clamp(48px, 6vw, 96px);
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
 }
-.modal-backdrop.open .modal{transform:none}
-.modal-close{
-  position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:999px;
-  background:var(--surface);border:1px solid var(--hair);z-index:3;
-  display:inline-flex;align-items:center;justify-content:center;font-size:20px;
-  transition:background .2s ease;
+@media (max-width: 900px){.dish-hero{grid-template-columns:1fr;gap:32px}}
+
+.dish-hero .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.dish-hero .tag{
+  padding:6px 14px;border-radius:999px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  background:var(--surface);color:var(--ink);border:1px solid var(--hair);
 }
-.modal-close:hover{background:var(--surface-2)}
-.modal-media{
-  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:160px;
-  border-radius:24px 24px 0 0;
+.dish-hero .tag.gluten{color:var(--forest);border-color:color-mix(in oklab, var(--forest) 35%, var(--hair))}
+:root[data-theme="dark"] .dish-hero .tag.gluten,
+@media (prefers-color-scheme: dark){.dish-hero .tag.gluten{color:var(--butter);border-color:color-mix(in oklab, var(--butter) 45%, var(--hair))}}
+.dish-hero .tag.proteico{color:var(--persimmon);border-color:color-mix(in oklab, var(--persimmon) 40%, var(--hair))}
+
+.dish-hero h1{
+  font-size: clamp(44px, 7vw, 96px);line-height:.92;letter-spacing:-.03em;
+  font-style:italic;font-weight:600;font-variation-settings:"opsz" 144, "SOFT" 100;
+  margin:0 0 18px;
 }
-.modal-body{padding:32px 32px 36px;display:flex;flex-direction:column;gap:20px}
-.modal-body .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
-.modal-body h3{font-size:34px;line-height:1.05;font-style:italic;font-weight:600;letter-spacing:-.02em}
-.modal-body .mprice{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--persimmon);font-weight:600;white-space:nowrap}
-.modal-body .mdesc{color:var(--ink-2);font-size:16px;line-height:1.6}
-.modal-body .ming{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.modal-body .ming .lbl{color:var(--persimmon);font-family:var(--f-display);font-style:italic;font-size:16px}
-.modal-body .ming ul{
-  display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;
+.dish-hero .dprice{
+  font-family:var(--f-display);font-style:italic;font-size:clamp(30px, 3.4vw, 44px);color:var(--persimmon);
+  font-weight:600;margin-bottom:22px;line-height:1;
 }
-.modal-body .ming li{
-  background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:8px 14px;
-  font-size:13px;color:var(--ink-2);
+.dish-hero .desc{font-size:18px;line-height:1.6;color:var(--ink-2);max-width:52ch;margin-bottom:32px}
+
+.dish-hero .buy{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:20px;
+  border:1px solid var(--hair);border-radius:var(--radius);background:var(--surface);
 }
-.modal-body .mfoot{
-  display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px;
-  padding-top:20px;border-top:1px solid var(--hair);
+.dish-hero .buy .qty{
+  display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--ground);
 }
-.qty{
-  display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--surface);
+.dish-hero .buy .qty button{width:42px;height:42px;font-size:20px;font-weight:600;color:var(--ink)}
+.dish-hero .buy .qty span{min-width:34px;text-align:center;font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
+.dish-hero .buy .btn{flex:1;justify-content:center;min-width:180px}
+
+/* Hero plate visual */
+.dish-visual{
+  aspect-ratio:1/1;border-radius:32px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow: 0 40px 80px -30px color-mix(in oklab, var(--ink) 50%, transparent);
 }
-.qty button{width:38px;height:38px;font-size:18px;font-weight:600;color:var(--ink)}
-.qty span{min-width:30px;text-align:center;font-weight:600;font-size:15px}
+.dish-visual::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%, color-mix(in oklab, #fff 40%, transparent), transparent 60%);
+  pointer-events:none;
+}
+.dish-visual .plate-bowl{
+  position:relative;width:62%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%, color-mix(in oklab, #fff 25%, transparent), color-mix(in oklab, var(--ink) 25%, transparent) 100%);
+  box-shadow: inset 0 -12px 30px color-mix(in oklab, var(--ink) 30%, transparent),
+              inset 0 8px 20px color-mix(in oklab, #fff 25%, transparent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(120px, 20vw, 220px);
+  animation:hover-plate 6s ease-in-out infinite;
+}
+@keyframes hover-plate{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-14px) rotate(1deg)}
+}
+@media (prefers-reduced-motion: reduce){.dish-visual .plate-bowl{animation:none}}
+.dish-visual .halo{
+  position:absolute;width:70%;aspect-ratio:1;border-radius:50%;
+  border:1px dashed color-mix(in oklab, var(--ink) 15%, transparent);
+  animation:spin 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce){.dish-visual .halo{animation:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dish-visual .halo::before, .dish-visual .halo::after{
+  content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--persimmon);
+  top:50%;transform:translate(-50%, -50%);
+}
+.dish-visual .halo::before{left:0}
+.dish-visual .halo::after{left:100%;background:var(--butter)}
+
+.dish-visual .tag-float{
+  position:absolute;top:24px;left:24px;background:var(--surface);border:1px solid var(--hair);
+  padding:10px 16px;border-radius:999px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--ink);
+  box-shadow:0 10px 24px color-mix(in oklab, var(--ink) 15%, transparent);
+}
+.dish-visual .price-float{
+  position:absolute;bottom:24px;right:24px;background:var(--persimmon);color:#fff;
+  padding:10px 18px;border-radius:999px;font-family:var(--f-display);font-style:italic;
+  font-weight:600;font-size:18px;
+  box-shadow:0 10px 24px color-mix(in oklab, var(--persimmon) 45%, transparent);
+}
+
+/* Sections inside dish view */
+.dish-block{padding: clamp(40px, 5vw, 72px) 0;border-top:1px solid var(--hair)}
+.dish-block .bhead{margin-bottom:28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end}
+@media (max-width: 700px){.dish-block .bhead{grid-template-columns:1fr;gap:10px}}
+.dish-block .num{font-family:var(--f-display);font-style:italic;color:var(--persimmon);font-size:18px}
+.dish-block h2{font-size:clamp(32px, 4.5vw, 54px);line-height:1;letter-spacing:-.025em;font-weight:600;font-style:italic;margin:0}
+
+/* Ingredients big grid */
+.ing-grid{
+  display:grid;grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:14px;
+}
+.ing-chip{
+  padding:22px 20px;border:1px solid var(--hair);border-radius:16px;background:var(--surface);
+  display:flex;align-items:center;gap:14px;
+  transition:transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.ing-chip:hover{transform:translateY(-3px);border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));background:var(--ground)}
+.ing-chip .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--persimmon);flex:none;
+  box-shadow:0 0 0 5px color-mix(in oklab, var(--persimmon) 20%, transparent);
+}
+.ing-chip .name{font-weight:500;font-size:15px;color:var(--ink);line-height:1.3}
+
+/* Formats table */
+.fmt-list{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.fmt-row{
+  display:flex;justify-content:space-between;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--hair);gap:20px;
+}
+.fmt-name{font-family:var(--f-display);font-style:italic;font-size:22px;font-weight:600}
+.fmt-price{font-family:var(--f-display);font-style:italic;font-size:24px;color:var(--persimmon);font-weight:600;white-space:nowrap}
+
+/* How we prep */
+.prep-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px}
+@media (max-width: 800px){.prep-grid{grid-template-columns:1fr}}
+.prep-card{
+  padding:28px;border:1px solid var(--hair);border-radius:20px;background:var(--surface);
+  display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.prep-card .picto{
+  width:52px;height:52px;border-radius:50%;background:var(--ground);
+  display:inline-flex;align-items:center;justify-content:center;font-size:26px;
+  margin-bottom:6px;
+}
+.prep-card h3{font-family:var(--f-display);font-size:22px;font-style:italic;font-weight:600;line-height:1.15}
+.prep-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+/* Similar dishes */
+.similar-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:16px}
+@media (max-width: 1000px){.similar-grid{grid-template-columns:repeat(3, 1fr)}}
+@media (max-width: 700px){.similar-grid{grid-template-columns:repeat(2, 1fr)}}
+
+/* Back button */
+.back-btn{
+  display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;
+  border:1px solid var(--hair);background:var(--surface);font-weight:600;font-size:14px;
+  transition:background .2s ease, transform .2s ease;
+}
+.back-btn:hover{background:var(--surface-2);transform:translateX(-3px)}
+.back-btn svg{width:14px;height:14px}
 
 /* ─────────────────────────────  CART DRAWER  ───────────────────────────── */
 .cart-back{
@@ -692,6 +803,8 @@ body::before{
     </div>
   </div>
 </header>
+
+<main id="mainView">
 
 <!-- ═══════════════════════════  HERO  ═══════════════════════════ -->
 <section id="top">
@@ -932,6 +1045,11 @@ body::before{
   </div>
 </footer>
 
+</main>
+
+<!-- ═══════════════════════════  DISH DETAIL VIEW (per-plate page)  ═══════════════════════════ -->
+<main id="dishView" hidden></main>
+
 <!-- Floating WhatsApp -->
 <a href="#" id="fabWA" class="fab-wa" aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.677 4.52 1.849 6.353L4 29l7.85-1.799A11.933 11.933 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16.001 3zm0 21.6c-1.94 0-3.755-.562-5.28-1.53l-.379-.24-4.66 1.067 1.086-4.523-.247-.39A9.55 9.55 0 016.4 15c0-5.298 4.303-9.6 9.6-9.6 5.298 0 9.6 4.302 9.6 9.6 0 5.297-4.302 9.6-9.6 9.6zm5.28-7.104c-.29-.145-1.712-.844-1.977-.941-.265-.096-.458-.144-.65.145-.194.29-.748.94-.917 1.133-.169.193-.338.217-.628.072-.29-.144-1.22-.45-2.323-1.435-.858-.766-1.437-1.712-1.605-2.002-.169-.29-.018-.446.127-.591.13-.13.29-.338.435-.507.145-.169.194-.29.29-.483.097-.193.048-.362-.024-.507-.072-.145-.65-1.567-.892-2.146-.235-.564-.474-.487-.65-.497l-.554-.01c-.192 0-.507.073-.772.362-.265.29-1.014.99-1.014 2.412 0 1.422 1.037 2.795 1.181 2.988.145.194 2.04 3.113 4.945 4.365.691.299 1.23.477 1.651.61.694.222 1.325.19 1.824.115.556-.083 1.712-.7 1.953-1.375.242-.675.242-1.254.169-1.375-.072-.121-.265-.194-.554-.338z"/></svg>
@@ -941,42 +1059,6 @@ body::before{
 <div class="toast" id="toast" role="status" aria-live="polite">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
   <span id="toastText">Agregado al carrito</span>
-</div>
-
-<!-- Modal for dish detail -->
-<div class="modal-backdrop" id="modalBack" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-  <div class="modal">
-    <button class="modal-close" id="modalClose" aria-label="Cerrar">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="modal-media" id="mMedia" aria-hidden="true">🥗</div>
-    <div class="modal-body">
-      <div class="mhead">
-        <h3 id="mTitle"></h3>
-        <div class="mprice" id="mPrice"></div>
-      </div>
-      <p class="mdesc" id="mDesc"></p>
-      <div class="ming">
-        <span class="lbl">Ingredientes</span>
-        <ul id="mIngredients"></ul>
-      </div>
-      <div class="ming" id="mFormatWrap" style="display:none">
-        <span class="lbl">Formatos</span>
-        <ul id="mFormats"></ul>
-      </div>
-      <div class="mfoot">
-        <div class="qty">
-          <button id="qMinus" aria-label="Menos">−</button>
-          <span id="qVal">1</span>
-          <button id="qPlus" aria-label="Más">+</button>
-        </div>
-        <button class="btn btn-primary" id="mAdd">
-          Agregar al carrito
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Cart drawer -->
@@ -1159,7 +1241,7 @@ function renderDish(d){
     </div>
     <span class="dish-add" aria-hidden="true">+</span>
   `;
-  card.addEventListener("click", () => openModal(d.id));
+  card.addEventListener("click", () => navigateToDish(d.id));
   return card;
 }
 
@@ -1169,51 +1251,249 @@ MENU.forEach(d => {
   (d.cat === "proteico" ? proteicoGrid : naturistaGrid).appendChild(renderDish(d));
 });
 
-/* ─────────────  MODAL  ───────────── */
-const modalBack = document.getElementById("modalBack");
-const modalClose = document.getElementById("modalClose");
-const mTitle = document.getElementById("mTitle");
-const mPrice = document.getElementById("mPrice");
-const mDesc = document.getElementById("mDesc");
-const mIng = document.getElementById("mIngredients");
-const mMedia = document.getElementById("mMedia");
-const qVal = document.getElementById("qVal");
-const qPlus = document.getElementById("qPlus");
-const qMinus = document.getElementById("qMinus");
-const mAdd = document.getElementById("mAdd");
-let currentDish = null;
+/* ─────────────  DISH DETAIL VIEW (per-plate page)  ───────────── */
+const mainView = document.getElementById("mainView");
+const dishView = document.getElementById("dishView");
 let currentQty = 1;
+let scrollMemory = 0;
 
-function openModal(id){
+function categoryLabel(cat){ return cat === "proteico" ? "Menú proteico" : "Menú naturista" }
+
+function similarDishes(current){
+  return MENU.filter(x => x.cat === current.cat && x.id !== current.id)
+    .sort(() => Math.random() - .5)
+    .slice(0, 4);
+}
+
+function renderDishPage(id){
   const d = MENU.find(x => x.id === id);
-  if(!d) return;
-  currentDish = d;
+  if(!d) return false;
   currentQty = 1;
-  qVal.textContent = "1";
-  mTitle.textContent = d.n;
-  mPrice.textContent = d.u;
-  mDesc.textContent = d.d;
-  mMedia.textContent = d.emoji;
-  mMedia.className = "modal-media " + d.palette;
-  mIng.innerHTML = "";
-  d.ing.forEach(i => mIng.appendChild(el("li", "", i)));
-  modalBack.classList.add("open");
-  document.body.style.overflow = "hidden";
+  const similar = similarDishes(d);
+  const tagClass = d.gluten ? "gluten" : "proteico";
+  const tagText = d.gluten ? "Sin gluten" : "Proteico";
+  const catAnchor = "#" + d.cat;
+
+  dishView.innerHTML = `
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="#" data-nav="home">Inicio</a>
+        <span class="sep">/</span>
+        <a href="${catAnchor}" data-nav="cat">${categoryLabel(d.cat)}</a>
+        <span class="sep">/</span>
+        <span class="cur">${d.n}</span>
+      </nav>
+    </div>
+    <div class="wrap dish-hero">
+      <div>
+        <div class="tags">
+          <span class="tag ${tagClass}">${tagText}</span>
+          <span class="tag">${categoryLabel(d.cat)}</span>
+        </div>
+        <h1>${d.n}</h1>
+        <div class="dprice">${d.u}</div>
+        <p class="desc">${d.d}</p>
+        <div class="buy">
+          <div class="qty" role="group" aria-label="Cantidad">
+            <button id="dpMinus" aria-label="Menos">−</button>
+            <span id="dpQty">1</span>
+            <button id="dpPlus" aria-label="Más">+</button>
+          </div>
+          <button class="btn btn-primary" id="dpAdd">
+            Agregar al carrito
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="dish-visual ${d.palette}" aria-hidden="true">
+        <span class="tag-float">${tagText}</span>
+        <div class="halo"></div>
+        <div class="plate-bowl">${d.emoji}</div>
+        <span class="price-float">${d.u.split("·")[0].trim()}</span>
+      </div>
+    </div>
+
+    <div class="wrap dish-block">
+      <div class="bhead">
+        <span class="num">01 — Lo que lleva</span>
+        <h2>Ingredientes</h2>
+      </div>
+      <div class="ing-grid">
+        ${d.ing.map(i => `<div class="ing-chip"><span class="dot"></span><span class="name">${i}</span></div>`).join("")}
+      </div>
+    </div>
+
+    ${d.u.includes("·") ? `
+    <div class="wrap dish-block">
+      <div class="bhead">
+        <span class="num">02 — Elegí tu formato</span>
+        <h2>Formatos y precios</h2>
+      </div>
+      <div class="fmt-list">
+        ${d.u.split("·").map(part => {
+          const t = part.trim();
+          const m = t.match(/^(.+?)\s*(\$[\d\.\,]+)$/);
+          if(m) return `<div class="fmt-row"><span class="fmt-name">${m[1].trim()}</span><span class="fmt-price">${m[2]}</span></div>`;
+          const m2 = t.match(/^(\$[\d\.\,]+)\s*(.+)$/);
+          if(m2) return `<div class="fmt-row"><span class="fmt-name">${m2[2].trim()}</span><span class="fmt-price">${m2[1]}</span></div>`;
+          return `<div class="fmt-row"><span class="fmt-name">Unidad</span><span class="fmt-price">${t}</span></div>`;
+        }).join("")}
+      </div>
+    </div>` : ""}
+
+    <div class="wrap dish-block">
+      <div class="bhead">
+        <span class="num">${d.u.includes("·") ? "03" : "02"} — Cómo lo hacemos</span>
+        <h2>Preparación & frescura</h2>
+      </div>
+      <div class="prep-grid">
+        <div class="prep-card">
+          <span class="picto">👐</span>
+          <h3>Hecho a mano</h3>
+          <p>Cocinado en cocina propia, en tandas chicas. Sin líneas industriales ni congelamiento.</p>
+        </div>
+        <div class="prep-card">
+          <span class="picto">🌿</span>
+          <h3>Ingredientes reales</h3>
+          <p>Lo que ves en la etiqueta es lo que lleva. Sin conservantes raros ni aditivos con nombre de laboratorio.</p>
+        </div>
+        <div class="prep-card">
+          <span class="picto">🚚</span>
+          <h3>Fresco a tu puerta</h3>
+          <p>Confirmás hoy antes de las 12, lo cocinamos y lo entregamos mañana en cualquier barrio de CABA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap dish-block">
+      <div class="bhead">
+        <span class="num">${d.u.includes("·") ? "04" : "03"} — Te puede gustar</span>
+        <h2>Del mismo menú</h2>
+      </div>
+      <div class="similar-grid" id="similarGrid"></div>
+    </div>
+
+    <div class="wrap" style="padding: 40px 0 20px">
+      <a href="${catAnchor}" class="back-btn" data-nav="cat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Volver a ${categoryLabel(d.cat).toLowerCase()}
+      </a>
+    </div>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span><em>Betina</em> Potap <small>Alimentos naturales</small></span></div>
+            <p class="fabout">Comida real, cocinada a mano en Buenos Aires. Menú proteico y naturista sin gluten, sin lácteos ni azúcar añadida.</p>
+          </div>
+          <div>
+            <h4>Menú</h4>
+            <a href="#proteico" data-nav="cat">Proteico</a>
+            <a href="#naturista" data-nav="cat">Naturista</a>
+            <a href="#empresas" data-nav="home">Para empresas</a>
+          </div>
+          <div>
+            <h4>Contacto</h4>
+            <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="mailto:hola@betinapotap.com">hola@betinapotap.com</a>
+          </div>
+          <div>
+            <h4>Info</h4>
+            <a href="#envios" data-nav="home">Envíos</a>
+            <a href="#historia" data-nav="home">Historia</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div>© ${new Date().getFullYear()} Betina Potap · Alimentos Naturales</div>
+          <div>Landing por <em>Draling</em> — automatización con IA</div>
+        </div>
+      </div>
+    </footer>
+  `;
+
+  // Similar grid (reuse card render)
+  const simGrid = dishView.querySelector("#similarGrid");
+  similar.forEach(sd => simGrid.appendChild(renderDish(sd)));
+
+  // Wire up interactive elements
+  const dpMinus = dishView.querySelector("#dpMinus");
+  const dpPlus = dishView.querySelector("#dpPlus");
+  const dpQty = dishView.querySelector("#dpQty");
+  const dpAdd = dishView.querySelector("#dpAdd");
+  dpMinus.addEventListener("click", () => { currentQty = Math.max(1, currentQty - 1); dpQty.textContent = currentQty });
+  dpPlus.addEventListener("click", () => { currentQty = Math.min(20, currentQty + 1); dpQty.textContent = currentQty });
+  dpAdd.addEventListener("click", () => addToCart(d.id, currentQty));
+
+  // Nav links inside detail view
+  dishView.querySelectorAll("[data-nav]").forEach(a => {
+    a.addEventListener("click", e => {
+      const kind = a.getAttribute("data-nav");
+      if(kind === "home"){
+        e.preventDefault();
+        const href = a.getAttribute("href");
+        showHome(href && href.startsWith("#") ? href : null);
+      } else if(kind === "cat"){
+        e.preventDefault();
+        const href = a.getAttribute("href");
+        showHome(href);
+      }
+    });
+  });
+
+  document.title = `${d.n} — Betina Potap · Alimentos Naturales`;
+  return true;
 }
-function closeModal(){
-  modalBack.classList.remove("open");
-  document.body.style.overflow = "";
-  currentDish = null;
+
+function showDish(id, pushState = true){
+  if(!renderDishPage(id)) return;
+  scrollMemory = window.scrollY;
+  mainView.hidden = true;
+  dishView.hidden = false;
+  window.scrollTo({top:0, behavior:"instant"});
+  if(pushState) history.pushState({dish:id}, "", `#/plato/${id}`);
 }
-modalClose.addEventListener("click", closeModal);
-modalBack.addEventListener("click", e => { if(e.target === modalBack) closeModal() });
-qPlus.addEventListener("click", () => { currentQty = Math.min(20, currentQty + 1); qVal.textContent = currentQty });
-qMinus.addEventListener("click", () => { currentQty = Math.max(1, currentQty - 1); qVal.textContent = currentQty });
-mAdd.addEventListener("click", () => {
-  if(!currentDish) return;
-  addToCart(currentDish.id, currentQty);
-  closeModal();
-});
+
+function showHome(anchor = null){
+  dishView.hidden = true;
+  dishView.innerHTML = "";
+  mainView.hidden = false;
+  document.title = "Betina Potap — Alimentos Naturales · CABA";
+  if(anchor){
+    // let layout settle then scroll
+    requestAnimationFrame(() => {
+      const target = document.querySelector(anchor);
+      if(target) target.scrollIntoView({behavior:"instant", block:"start"});
+      else window.scrollTo({top:0, behavior:"instant"});
+    });
+    history.pushState({}, "", anchor);
+  } else {
+    window.scrollTo({top: scrollMemory || 0, behavior:"instant"});
+    if(location.hash.startsWith("#/plato/")) history.pushState({}, "", location.pathname + location.search);
+  }
+}
+
+function navigateToDish(id){ showDish(id, true) }
+
+/* Deep link support: parse #/plato/{id} on load and on popstate */
+function handleRoute(){
+  const m = location.hash.match(/^#\/plato\/([\w-]+)$/);
+  if(m){
+    const id = m[1];
+    if(MENU.find(x => x.id === id)){
+      if(dishView.hidden || !dishView.innerHTML.length) showDish(id, false);
+      return;
+    }
+  }
+  // Not a dish route: show home
+  if(!dishView.hidden){
+    dishView.hidden = true;
+    dishView.innerHTML = "";
+    mainView.hidden = false;
+    document.title = "Betina Potap — Alimentos Naturales · CABA";
+  }
+}
+window.addEventListener("popstate", handleRoute);
 
 /* ─────────────  CART  ───────────── */
 const cart = new Map(); // id => qty
@@ -1378,6 +1658,18 @@ navLinksEl.addEventListener("click", e => {
   if(e.target.tagName === "A") navLinksEl.classList.remove("open");
 });
 
+/* Nav & brand: if we're on a dish page, return home + scroll to anchor */
+document.querySelectorAll(".nav-links a, .brand").forEach(a => {
+  a.addEventListener("click", e => {
+    const href = a.getAttribute("href");
+    if(!href || !href.startsWith("#")) return;
+    if(!dishView.hidden){
+      e.preventDefault();
+      showHome(href === "#top" ? null : href);
+    }
+  });
+});
+
 /* ─────────────  REVEAL ON SCROLL  ───────────── */
 const revIO = new IntersectionObserver(entries => {
   entries.forEach(en => {
@@ -1404,8 +1696,8 @@ if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
 /* ─────────────  KEYBOARD  ───────────── */
 document.addEventListener("keydown", e => {
   if(e.key === "Escape"){
-    if(modalBack.classList.contains("open")) closeModal();
     if(cartEl.classList.contains("open")) closeCart();
+    else if(!dishView.hidden) showHome();
   }
 });
 
@@ -1414,6 +1706,7 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 
 /* Init */
 updateCart();
+handleRoute();
 </script>
 </body>
 </html>
