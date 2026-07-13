@@ -1,0 +1,178 @@
+{
+  "name": "Estudio-C — Bot de WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "estudio-c",
+        "responseMode": "onReceived",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "webhook-whatsapp",
+      "name": "Webhook WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "webhookId": "estudio-c-whatsapp"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ================== CONFIG — EDITA SOLO ESTO ==================\nconst PHONE_NUMBER_ID = 'PONER_PHONE_NUMBER_ID'; // de Meta (WhatsApp > API Setup)\nconst TOKEN           = 'PONER_TOKEN';           // token de acceso de WhatsApp\nconst NUM_ASESOR      = '5491100000000';         // WhatsApp del asesor (sin + ni espacios)\nconst NUM_EQUIPO      = '5491100000000';         // WhatsApp donde avisar los pedidos de reunion\n// =============================================================\n\nconst item = $input.first().json;\nconst body = item.body || item;\nconst value = body && body.entry && body.entry[0] && body.entry[0].changes\n  && body.entry[0].changes[0] && body.entry[0].changes[0].value;\nconst msg = value && value.messages && value.messages[0];\n\n// Si no hay mensaje (ej: acuse de recibo/estado), no hacemos nada\nif (!msg) { return []; }\n\nconst from = msg.from;\nlet choice = '';\nif (msg.type === 'interactive' && msg.interactive) {\n  choice = (msg.interactive.button_reply && msg.interactive.button_reply.id)\n        || (msg.interactive.list_reply && msg.interactive.list_reply.id) || '';\n} else if (msg.type === 'text' && msg.text) {\n  choice = (msg.text.body || '').trim().toLowerCase();\n}\n\nconst txt = (to, t) => ({ messaging_product: 'whatsapp', to, type: 'text', text: { body: t } });\n\n// Menu de bienvenida (3 botones)\nconst welcome = {\n  messaging_product: 'whatsapp', to: from, type: 'interactive',\n  interactive: {\n    type: 'button',\n    body: { text: '¡Hola! 👋 Soy el asistente de Estudio-C. Contanos qué necesitás y te ayudamos 👇' },\n    action: { buttons: [\n      { type: 'reply', reply: { id: 'btn_agendar', title: 'Agendar reunión' } },\n      { type: 'reply', reply: { id: 'btn_info',    title: 'Más información' } },\n      { type: 'reply', reply: { id: 'btn_asesor',  title: 'Hablar con asesor' } }\n    ] }\n  }\n};\n\nlet reply = null;\nlet notify = null;\n\nif (choice === 'btn_info' || choice === '2' || choice.includes('informacion') || choice.includes('información')) {\n  // Submenu \"Mas informacion\" (lista de 4 opciones)\n  reply = {\n    messaging_product: 'whatsapp', to: from, type: 'interactive',\n    interactive: {\n      type: 'list',\n      body: { text: '¿Sobre qué te gustaría saber más? Elegí una opción 👇' },\n      action: { button: 'Ver opciones', sections: [{\n        title: 'Más información',\n        rows: [\n          { id: 'info_presencial',    title: 'Cursos presenciales' },\n          { id: 'info_elearning',     title: 'Cursos e-learning' },\n          { id: 'info_asesoramiento', title: 'Asesoramiento' },\n          { id: 'info_plataformas',   title: 'Plataformas' }\n        ]\n      }] }\n    }\n  };\n} else if (choice === 'btn_agendar' || choice === '1' || choice.includes('agend') || choice.includes('reuni')) {\n  reply = txt(from, '¡Genial! 📅 Para coordinar una reunión, escribinos en un solo mensaje:\\n\\n• Tu nombre\\n• El día y el horario que te quede cómodo\\n\\nEn breve te confirmamos. 🙌');\n  notify = txt(NUM_EQUIPO, '🔔 Nuevo pedido de REUNIÓN desde el bot.\\nCliente: +' + from + '\\nEscribile para coordinar.');\n} else if (choice === 'btn_asesor' || choice === '3' || choice.includes('asesor')) {\n  reply = txt(from, '¡Perfecto! 🙋 Te paso el contacto directo de un asesor:\\n\\nhttps://wa.me/' + NUM_ASESOR + '\\n\\nEscribile por ahí y te atiende a la brevedad.');\n} else if (choice === 'info_presencial') {\n  reply = txt(from, '🎓 *Cursos presenciales*\\n[COMPLETAR: temario, sede, días y horarios, precio.]\\n\\n¿Querés que te contacte un asesor? Respondé *asesor*.');\n} else if (choice === 'info_elearning') {\n  reply = txt(from, '💻 *Cursos e-learning*\\n[COMPLETAR: plataforma, modalidad, duración, precio.]\\n\\n¿Querés que te contacte un asesor? Respondé *asesor*.');\n} else if (choice === 'info_asesoramiento') {\n  reply = txt(from, '🧭 *Asesoramiento*\\n[COMPLETAR: en qué asesoran, cómo es el proceso, precio.]\\n\\n¿Querés que te contacte un asesor? Respondé *asesor*.');\n} else if (choice === 'info_plataformas') {\n  reply = txt(from, '🛠️ *Plataformas*\\n[COMPLETAR: qué plataformas ofrecen o integran.]\\n\\n¿Querés que te contacte un asesor? Respondé *asesor*.');\n} else {\n  // Cualquier otro mensaje (saludo, texto libre) -> menu de bienvenida\n  reply = welcome;\n}\n\nconst url = 'https://graph.facebook.com/v21.0/' + PHONE_NUMBER_ID + '/messages';\nreturn [{ json: { to: from, url, token: TOKEN, reply, notify } }];\n"
+      },
+      "id": "router",
+      "name": "Router",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $json.token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.reply) }}",
+        "options": {}
+      },
+      "id": "enviar-respuesta",
+      "name": "Enviar respuesta",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "cond-notify",
+              "leftValue": "={{ $json.notify }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "avisar-al-equipo",
+      "name": "¿Avisar al equipo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        760,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $json.token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.notify) }}",
+        "options": {}
+      },
+      "id": "avisar-al-equipo",
+      "name": "Avisar al equipo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1020,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Router": {
+      "main": [
+        [
+          {
+            "node": "Enviar respuesta",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Avisar al equipo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Avisar al equipo?": {
+      "main": [
+        [
+          {
+            "node": "Avisar al equipo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}
