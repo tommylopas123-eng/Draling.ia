@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Betina Potap — Alimentos Naturales · CABA</title>
+<meta name="description" content="Comida honesta, hecha a mano en CABA. Menú proteico + menú naturista sin gluten, sin lácteos ni azúcar. Envíos por WhatsApp." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ─────────────────────────────  TOKENS  ───────────────────────────── */
+:root{
+  /* light */
+  --ground:#F1F0E4;
+  --surface:#FAF9F1;
+  --surface-2:#EAE7D6;
+  --ink:#1A1F17;
+  --ink-2:#3A3F32;
+  --muted:#6B6D5C;
+  --hair:#D6D3BF;
+  --forest:#243B22;
+  --forest-2:#3E5B36;
+  --moss:#5B7D3E;
+  --persimmon:#DB6A2E;
+  --persimmon-2:#C55823;
+  --butter:#F0C264;
+  --clay:#B8543A;
+
+  --grain-op:.05;
+
+  /* type */
+  --f-display: 'Fraunces', 'Playfair Display', 'Times New Roman', Georgia, serif;
+  --f-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+
+  /* layout */
+  --max: 1240px;
+  --pad-x: clamp(20px, 4vw, 56px);
+  --radius: 20px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ground:#141410;
+    --surface:#1B1B14;
+    --surface-2:#22221A;
+    --ink:#F0EAD8;
+    --ink-2:#CFCAB6;
+    --muted:#8F8B76;
+    --hair:#2D2C22;
+    --forest:#6E9160;
+    --forest-2:#7EA36F;
+    --moss:#94B57B;
+    --persimmon:#F0895A;
+    --persimmon-2:#F6A87F;
+    --butter:#F4D177;
+    --clay:#E4835F;
+    --grain-op:.09;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141410;
+  --surface:#1B1B14;
+  --surface-2:#22221A;
+  --ink:#F0EAD8;
+  --ink-2:#CFCAB6;
+  --muted:#8F8B76;
+  --hair:#2D2C22;
+  --forest:#6E9160;
+  --forest-2:#7EA36F;
+  --moss:#94B57B;
+  --persimmon:#F0895A;
+  --persimmon-2:#F6A87F;
+  --butter:#F4D177;
+  --clay:#E4835F;
+  --grain-op:.09;
+}
+:root[data-theme="light"]{
+  --ground:#F1F0E4;
+  --surface:#FAF9F1;
+  --surface-2:#EAE7D6;
+  --ink:#1A1F17;
+  --ink-2:#3A3F32;
+  --muted:#6B6D5C;
+  --hair:#D6D3BF;
+  --forest:#243B22;
+  --forest-2:#3E5B36;
+  --moss:#5B7D3E;
+  --persimmon:#DB6A2E;
+  --persimmon-2:#C55823;
+  --butter:#F0C264;
+  --clay:#B8543A;
+  --grain-op:.05;
+}
+
+/* ─────────────────────────────  BASE  ───────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{overflow-x:hidden;position:relative}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+
+/* Grain texture — sitewide */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  opacity:var(--grain-op);mix-blend-mode:multiply;
+}
+@media (prefers-color-scheme: dark){body::before{mix-blend-mode:screen}}
+:root[data-theme="dark"] body::before{mix-blend-mode:screen}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad-x);padding-right:var(--pad-x);position:relative;z-index:2}
+
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--muted);
+}
+.rule{height:1px;background:var(--hair);border:0;margin:0}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ─────────────────────────────  NAV  ───────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:60;
+  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  background:color-mix(in oklab, var(--ground) 78%, transparent);
+  border-bottom:1px solid transparent;transition:border-color .3s ease, background .3s ease;
+}
+.nav.scrolled{border-bottom-color:var(--hair)}
+.nav-inner{display:flex;align-items:center;gap:24px;padding:14px 0;min-height:64px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:600;font-size:22px;letter-spacing:-.02em;line-height:1}
+.brand em{font-style:italic;font-weight:600}
+.brand small{font-family:var(--f-body);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-left:2px;font-weight:600}
+.brand-mark{
+  width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--butter), var(--persimmon) 55%, var(--clay) 100%);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ink) 25%, transparent);
+  position:relative;flex:none;
+}
+.brand-mark::after{
+  content:"";position:absolute;inset:6px;border-radius:50%;
+  background:radial-gradient(circle at 65% 65%, transparent 55%, color-mix(in oklab, var(--forest) 60%, transparent) 100%);
+  opacity:.55;
+}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-links a{
+  padding:8px 14px;border-radius:999px;font-size:14px;font-weight:500;color:var(--ink-2);
+  transition:background .2s ease, color .2s ease;position:relative;
+}
+.nav-links a:hover{background:var(--surface-2);color:var(--ink)}
+.nav-links a.active{color:var(--forest);background:color-mix(in oklab, var(--forest) 12%, transparent)}
+:root[data-theme="dark"] .nav-links a.active,
+@media (prefers-color-scheme: dark){.nav-links a.active{color:var(--butter);background:color-mix(in oklab, var(--butter) 14%, transparent)}}
+
+.nav-actions{display:flex;align-items:center;gap:6px}
+.theme-btn,.cart-btn{
+  width:40px;height:40px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--hair);background:var(--surface);transition:transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.theme-btn:hover,.cart-btn:hover{background:var(--surface-2);border-color:color-mix(in oklab, var(--ink) 15%, var(--hair))}
+.cart-btn{position:relative}
+.cart-btn .badge{
+  position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;
+  border-radius:999px;background:var(--persimmon);color:#fff;font-size:11px;font-weight:700;
+  display:none;align-items:center;justify-content:center;box-shadow:0 4px 10px color-mix(in oklab, var(--persimmon) 45%, transparent);
+}
+.cart-btn.has-items .badge{display:inline-flex;animation:pop .35s ease}
+@keyframes pop{from{transform:scale(.5)}to{transform:scale(1)}}
+.hamb{display:none}
+@media (max-width: 900px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--hair);flex-direction:column;padding:12px 20px;gap:4px;align-items:stretch}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 14px;border-radius:12px;font-size:16px}
+  .hamb{display:inline-flex;width:40px;height:40px;border-radius:999px;border:1px solid var(--hair);background:var(--surface);align-items:center;justify-content:center;margin-left:auto}
+  .nav-actions{margin-left:0}
+}
+
+/* ─────────────────────────────  HERO  ───────────────────────────── */
+.hero{padding: clamp(48px, 8vw, 120px) 0 clamp(64px, 10vw, 140px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+@media (max-width: 900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+.hero .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--muted);margin-bottom:22px}
+.hero .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 5px color-mix(in oklab, var(--moss) 20%, transparent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.15);opacity:.5}}
+
+.hero h1{
+  font-size: clamp(48px, 8vw, 118px);
+  line-height:.92;letter-spacing:-.035em;font-weight:600;
+  margin:0 0 22px;
+}
+.hero h1 em{font-style:italic;color:var(--forest);font-weight:600;font-variation-settings:"opsz" 144, "SOFT" 100}
+:root[data-theme="dark"] .hero h1 em,
+@media (prefers-color-scheme: dark){.hero h1 em{color:var(--butter)}}
+.hero .lead{font-size: clamp(16px, 1.4vw, 19px); color:var(--ink-2); max-width:52ch; line-height:1.55; margin-bottom:32px}
+
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 28px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:-.005em;
+  transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
+}
+.btn-primary{background:var(--forest);color:var(--surface);box-shadow: 0 10px 24px color-mix(in oklab, var(--forest) 30%, transparent)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--forest-2);box-shadow: 0 14px 30px color-mix(in oklab, var(--forest) 40%, transparent)}
+.btn-ghost{color:var(--ink);border:1px solid var(--hair)}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-persim{background:var(--persimmon);color:#fff;box-shadow: 0 10px 24px color-mix(in oklab, var(--persimmon) 40%, transparent)}
+.btn-persim:hover{transform:translateY(-2px);background:var(--persimmon-2)}
+.btn svg{width:16px;height:16px}
+
+.hero-meta{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.hero-meta strong{display:block;font-family:var(--f-display);font-size:22px;color:var(--ink);font-weight:600;font-style:italic;line-height:1}
+.hero-meta .mi{padding-right:28px;border-right:1px solid var(--hair)}
+.hero-meta .mi:last-child{border-right:0}
+
+/* Hero plates composition */
+.plates{position:relative;height:min(560px, 64vw);min-height:420px}
+.plate{
+  position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;
+  box-shadow: 0 20px 60px -12px color-mix(in oklab, var(--ink) 30%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--ink) 8%, transparent);
+  will-change:transform;
+}
+.plate .ptag{
+  position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:8px 14px;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink);white-space:nowrap;
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--ink) 12%, transparent);
+}
+.plate .ppr{
+  position:absolute;top:-12px;right:-6px;
+  background:var(--persimmon);color:#fff;border-radius:999px;padding:6px 12px;
+  font-family:var(--f-display);font-style:italic;font-weight:600;font-size:15px;
+  box-shadow: 0 8px 16px color-mix(in oklab, var(--persimmon) 45%, transparent);
+}
+.plate.p1{
+  width:280px;height:280px;top:20px;right:20px;
+  background: radial-gradient(circle at 32% 30%, #F5DFA6, #E8A85F 55%, #B26A2F 100%);
+  animation: floaty 8s ease-in-out infinite;
+}
+.plate.p2{
+  width:200px;height:200px;bottom:20px;left:20px;
+  background: radial-gradient(circle at 30% 30%, #C7DCA5, #7FA85B 60%, #365a2a 100%);
+  animation: floaty 9s ease-in-out infinite -2s;
+}
+.plate.p3{
+  width:170px;height:170px;top:60px;left:0;
+  background: radial-gradient(circle at 35% 30%, #F5C1A7, #D77A55 55%, #8b3d1e 100%);
+  animation: floaty 7.4s ease-in-out infinite -4s;
+}
+@keyframes floaty{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-14px) rotate(1.2deg)}
+}
+@media (prefers-reduced-motion: reduce){
+  .plate{animation:none}
+}
+@media (max-width: 600px){
+  .plate.p1{width:230px;height:230px}
+  .plate.p2{width:160px;height:160px}
+  .plate.p3{width:140px;height:140px}
+}
+
+/* Marquee bar under hero */
+.marquee{
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  overflow:hidden;background:var(--surface);
+}
+.marquee-track{
+  display:flex;gap:64px;padding:20px 0;animation:mv 34s linear infinite;
+  font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--ink-2);white-space:nowrap;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:64px}
+.marquee-track b{color:var(--persimmon);font-weight:600}
+@keyframes mv{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee-track{animation:none}}
+
+/* ─────────────────────────────  VALUES  ───────────────────────────── */
+.values{padding: clamp(64px, 8vw, 110px) 0}
+.values-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:52px}
+@media (max-width: 800px){.values-head{grid-template-columns:1fr}}
+.values-head h2{font-size:clamp(34px, 5vw, 62px);line-height:1;font-weight:600;letter-spacing:-.025em}
+.values-head h2 em{font-style:italic;color:var(--persimmon)}
+.values-head p{color:var(--ink-2);max-width:46ch;font-size:16px;line-height:1.55}
+
+.value-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:0;border-top:1px solid var(--hair)}
+@media (max-width: 800px){.value-grid{grid-template-columns:1fr}}
+.value{
+  padding:36px 32px;border-bottom:1px solid var(--hair);border-right:1px solid var(--hair);
+  display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;
+  transition:background .3s ease;
+}
+.value:last-child{border-right:0}
+@media (max-width: 800px){.value{border-right:0}}
+.value:hover{background:var(--surface)}
+.value .vnum{font-family:var(--f-display);font-style:italic;font-size:14px;color:var(--persimmon);letter-spacing:-.01em}
+.value h3{font-size:26px;line-height:1.1;font-weight:600;font-style:italic}
+.value p{color:var(--muted);font-size:14px;line-height:1.6}
+.value .vico{
+  width:44px;height:44px;border-radius:50%;background:var(--surface-2);
+  display:inline-flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:6px;
+}
+
+/* ─────────────────────────────  MENU SECTION  ───────────────────────────── */
+.menu-section{padding: clamp(56px, 7vw, 100px) 0;scroll-margin-top:100px}
+.menu-head{
+  display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:end;margin-bottom:44px;
+}
+@media (max-width: 800px){.menu-head{grid-template-columns:1fr;gap:16px}}
+.menu-head .lbl{color:var(--persimmon);font-family:var(--f-display);font-style:italic;font-size:20px}
+.menu-head h2{font-size:clamp(42px, 7vw, 96px);line-height:.92;font-weight:600;letter-spacing:-.03em;font-style:italic}
+.menu-head p{color:var(--muted);font-size:14px;max-width:34ch;text-align:right}
+@media (max-width: 800px){.menu-head p{text-align:left}}
+
+.dish-grid{
+  display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;
+}
+@media (max-width: 1080px){.dish-grid{grid-template-columns:repeat(3, 1fr)}}
+@media (max-width: 780px){.dish-grid{grid-template-columns:repeat(2, 1fr);gap:14px}}
+@media (max-width: 480px){.dish-grid{grid-template-columns:1fr 1fr;gap:12px}}
+
+.dish{
+  background:var(--surface);border:1px solid var(--hair);border-radius:var(--radius);padding:18px 18px 20px;
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;overflow:hidden;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease;
+  cursor:pointer;
+  text-align:left;
+}
+.dish:hover{
+  transform:translateY(-4px);
+  box-shadow: 0 20px 40px -18px color-mix(in oklab, var(--ink) 40%, transparent);
+  border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));
+}
+.dish-media{
+  aspect-ratio:1/1;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:64px;
+  position:relative;overflow:hidden;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.dish:hover .dish-media{transform:scale(1.04)}
+.dish-media::after{
+  content:"";position:absolute;inset:auto 0 -30% 0;height:60%;
+  background:radial-gradient(60% 100% at 50% 100%, color-mix(in oklab, var(--ink) 22%, transparent), transparent 70%);
+  pointer-events:none;
+}
+.dish-body{display:flex;flex-direction:column;gap:8px}
+.dish-name{font-family:var(--f-display);font-size:19px;line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.dish-price{font-family:var(--f-display);font-style:italic;font-size:20px;color:var(--persimmon);font-weight:600}
+.dish-tag{
+  position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:999px;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  background:var(--surface);color:var(--ink);border:1px solid var(--hair);
+  z-index:2;
+}
+.dish-tag.gluten{color:var(--forest);border-color:color-mix(in oklab, var(--forest) 35%, var(--hair))}
+:root[data-theme="dark"] .dish-tag.gluten,
+@media (prefers-color-scheme: dark){.dish-tag.gluten{color:var(--butter);border-color:color-mix(in oklab, var(--butter) 45%, var(--hair))}}
+.dish-add{
+  position:absolute;bottom:16px;right:16px;
+  width:38px;height:38px;border-radius:999px;background:var(--forest);color:var(--surface);
+  display:inline-flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;line-height:1;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .25s ease, transform .25s ease, background .2s ease;
+  z-index:3;
+}
+.dish:hover .dish-add{opacity:1;transform:translateY(0)}
+.dish-add:hover{background:var(--persimmon)}
+
+/* Palette variations per dish media */
+.m-salmon{background:radial-gradient(circle at 30% 30%, #FBD1B0, #E38560 60%, #8f3f21 100%)}
+.m-forest{background:radial-gradient(circle at 30% 30%, #CFE3AF, #6E9660 55%, #2b4b25 100%)}
+.m-clay{background:radial-gradient(circle at 30% 30%, #F0BFA0, #C56E43 60%, #7c3a1c 100%)}
+.m-butter{background:radial-gradient(circle at 30% 30%, #FBE7B4, #E9C070 60%, #a3771c 100%)}
+.m-plum{background:radial-gradient(circle at 30% 30%, #DBAFBE, #A0576D 60%, #4d2231 100%)}
+.m-wheat{background:radial-gradient(circle at 30% 30%, #F0DEB1, #C99E5C 60%, #7a5a24 100%)}
+.m-cocoa{background:radial-gradient(circle at 30% 30%, #C7A88E, #7C4B32 60%, #3d1f10 100%)}
+.m-moss{background:radial-gradient(circle at 30% 30%, #C0D9A0, #7B9A54 55%, #384a20 100%)}
+.m-cream{background:radial-gradient(circle at 30% 30%, #F5E9C7, #C7B48A 60%, #7a6537 100%)}
+.m-tomato{background:radial-gradient(circle at 30% 30%, #F0B49B, #D06340 55%, #742d17 100%)}
+
+/* ─────────────────────────────  EMPRESAS  ───────────────────────────── */
+.empresas{
+  margin: clamp(60px, 8vw, 110px) 0 0;padding: clamp(56px, 8vw, 110px) 0;
+  background: var(--forest);color: #F1EEDD;position:relative;overflow:hidden;
+  scroll-margin-top:100px;
+}
+:root[data-theme="dark"] .empresas,
+@media (prefers-color-scheme: dark){.empresas{background:linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);color:var(--ink)}}
+
+.empresas::before{
+  content:"";position:absolute;top:-100px;right:-100px;width:520px;height:520px;
+  background:radial-gradient(circle, color-mix(in oklab, var(--persimmon) 40%, transparent), transparent 70%);
+  filter: blur(40px);
+  pointer-events:none;
+}
+.emp-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative;z-index:2}
+@media (max-width: 900px){.emp-grid{grid-template-columns:1fr}}
+.empresas .eyebrow{color:#F0C264}
+:root[data-theme="dark"] .empresas .eyebrow,
+@media (prefers-color-scheme: dark){.empresas .eyebrow{color:var(--persimmon)}}
+.empresas h2{font-size:clamp(38px, 6vw, 78px);line-height:.95;font-weight:600;letter-spacing:-.028em;margin:14px 0 20px}
+.empresas h2 em{font-style:italic;color:var(--butter)}
+:root[data-theme="dark"] .empresas h2 em,
+@media (prefers-color-scheme: dark){.empresas h2 em{color:var(--persimmon)}}
+.empresas .lead{font-size:17px;line-height:1.6;color: color-mix(in oklab, #F1EEDD 80%, transparent);max-width:50ch;margin-bottom:28px}
+:root[data-theme="dark"] .empresas .lead,
+@media (prefers-color-scheme: dark){.empresas .lead{color:var(--ink-2)}}
+.emp-benefits{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:32px 0 36px}
+.emp-benefits li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5}
+.emp-benefits li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--butter);flex:none;margin-top:6px}
+:root[data-theme="dark"] .emp-benefits li::before,
+@media (prefers-color-scheme: dark){.emp-benefits li::before{background:var(--persimmon)}}
+
+.emp-card{
+  background: color-mix(in oklab, #F1EEDD 8%, transparent);
+  border: 1px solid color-mix(in oklab, #F1EEDD 18%, transparent);
+  border-radius:24px;padding:32px;backdrop-filter:blur(6px);
+}
+:root[data-theme="dark"] .emp-card,
+@media (prefers-color-scheme: dark){.emp-card{background:var(--surface-2);border-color:var(--hair)}}
+.emp-card h3{font-size:22px;font-style:italic;margin-bottom:20px}
+.emp-plan{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid color-mix(in oklab, #F1EEDD 15%, transparent)}
+:root[data-theme="dark"] .emp-plan,
+@media (prefers-color-scheme: dark){.emp-plan{border-color:var(--hair)}}
+.emp-plan:last-child{border-bottom:0}
+.emp-plan-name{font-weight:600;font-size:15px}
+.emp-plan small{display:block;font-weight:400;color:color-mix(in oklab, #F1EEDD 65%, transparent);font-size:12px;margin-top:2px}
+:root[data-theme="dark"] .emp-plan small,
+@media (prefers-color-scheme: dark){.emp-plan small{color:var(--muted)}}
+.emp-plan-price{font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--butter);font-weight:600;white-space:nowrap}
+:root[data-theme="dark"] .emp-plan-price,
+@media (prefers-color-scheme: dark){.emp-plan-price{color:var(--persimmon)}}
+
+/* ─────────────────────────────  STORY  ───────────────────────────── */
+.story{padding: clamp(64px, 9vw, 130px) 0;scroll-margin-top:100px}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media (max-width: 900px){.story-grid{grid-template-columns:1fr;gap:40px}}
+.story-visual{
+  aspect-ratio:4/5;border-radius:var(--radius);
+  background: linear-gradient(160deg, var(--butter), var(--persimmon) 55%, var(--forest));
+  position:relative;overflow:hidden;
+  box-shadow: 0 30px 60px -20px color-mix(in oklab, var(--ink) 40%, transparent);
+}
+.story-visual::before,
+.story-visual::after{content:"";position:absolute;border-radius:50%}
+.story-visual::before{
+  width:70%;aspect-ratio:1;top:8%;left:15%;
+  background:radial-gradient(circle at 30% 30%, #FBE7B4, #d69a4e 70%);
+  box-shadow: inset 0 0 0 8px color-mix(in oklab, var(--ink) 12%, transparent);
+}
+.story-visual::after{
+  width:35%;aspect-ratio:1;bottom:12%;right:8%;
+  background:radial-gradient(circle at 30% 30%, #C7DCA5, #587a3a 65%);
+  box-shadow: inset 0 0 0 6px color-mix(in oklab, var(--ink) 15%, transparent);
+}
+.story h2{font-size:clamp(38px, 5vw, 66px);line-height:.98;letter-spacing:-.03em;margin-bottom:28px;font-style:italic;font-weight:600}
+.story h2 em{color:var(--persimmon);font-style:italic}
+.story p{color:var(--ink-2);font-size:17px;line-height:1.65;margin-bottom:18px;max-width:52ch}
+.story .sig{
+  margin-top:32px;font-family:var(--f-display);font-style:italic;font-size:28px;color:var(--forest);
+  transform:rotate(-4deg);display:inline-block;letter-spacing:-.02em;
+}
+:root[data-theme="dark"] .story .sig,
+@media (prefers-color-scheme: dark){.story .sig{color:var(--butter)}}
+
+/* ─────────────────────────────  ENVIOS / FAQ  ───────────────────────────── */
+.envios{padding: clamp(56px, 8vw, 110px) 0;background:var(--surface);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);scroll-margin-top:100px}
+.envios-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start}
+@media (max-width: 900px){.envios-grid{grid-template-columns:1fr;gap:40px}}
+.envios h2{font-size:clamp(38px, 5vw, 62px);line-height:1;letter-spacing:-.028em;font-style:italic;font-weight:600;margin-bottom:16px}
+.envios .lead{color:var(--ink-2);font-size:17px;line-height:1.6;max-width:36ch}
+.faq{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.faq details{border-bottom:1px solid var(--hair);padding:20px 0}
+.faq summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  font-size:17px;font-weight:600;font-family:var(--f-display);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";font-family:var(--f-body);font-weight:400;font-size:22px;color:var(--persimmon);
+  transition:transform .3s ease;
+}
+.faq details[open] summary::after{content:"−";transform:rotate(0)}
+.faq p{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.6;max-width:60ch}
+
+/* ─────────────────────────────  FINAL CTA  ───────────────────────────── */
+.final{padding: clamp(70px, 10vw, 140px) 0;text-align:center;position:relative;overflow:hidden}
+.final h2{font-size:clamp(48px, 8vw, 128px);line-height:.92;letter-spacing:-.035em;font-weight:600;font-style:italic;margin-bottom:24px}
+.final h2 em{color:var(--persimmon);font-style:italic}
+.final p{color:var(--ink-2);font-size:18px;max-width:44ch;margin:0 auto 40px;line-height:1.55}
+
+/* ─────────────────────────────  FOOTER  ───────────────────────────── */
+.footer{
+  background:var(--forest);color: color-mix(in oklab, #F1EEDD 85%, transparent);
+  padding: clamp(56px, 7vw, 90px) 0 32px;position:relative;overflow:hidden;
+}
+:root[data-theme="dark"] .footer,
+@media (prefers-color-scheme: dark){.footer{background:var(--surface);color:var(--ink-2);border-top:1px solid var(--hair)}}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+@media (max-width: 800px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media (max-width: 480px){.footer-grid{grid-template-columns:1fr}}
+.footer h4{font-family:var(--f-display);font-style:italic;font-size:20px;color:var(--butter);margin-bottom:16px;font-weight:600}
+:root[data-theme="dark"] .footer h4,
+@media (prefers-color-scheme: dark){.footer h4{color:var(--persimmon)}}
+.footer a{display:block;padding:6px 0;font-size:14px;transition:color .2s ease}
+.footer a:hover{color:var(--butter)}
+:root[data-theme="dark"] .footer a:hover,
+@media (prefers-color-scheme: dark){.footer a:hover{color:var(--persimmon)}}
+.footer .brand{color:#F1EEDD;font-size:26px}
+:root[data-theme="dark"] .footer .brand,
+@media (prefers-color-scheme: dark){.footer .brand{color:var(--ink)}}
+.footer .brand small{color:color-mix(in oklab, #F1EEDD 60%, transparent)}
+:root[data-theme="dark"] .footer .brand small,
+@media (prefers-color-scheme: dark){.footer .brand small{color:var(--muted)}}
+.footer .fabout{color:color-mix(in oklab, #F1EEDD 70%, transparent);font-size:14px;line-height:1.6;margin-top:16px;max-width:32ch}
+:root[data-theme="dark"] .footer .fabout,
+@media (prefers-color-scheme: dark){.footer .fabout{color:var(--muted)}}
+.footer-bottom{
+  margin-top:56px;padding-top:24px;border-top:1px solid color-mix(in oklab, #F1EEDD 15%, transparent);
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-size:12px;color:color-mix(in oklab, #F1EEDD 60%, transparent);
+}
+:root[data-theme="dark"] .footer-bottom,
+@media (prefers-color-scheme: dark){.footer-bottom{border-color:var(--hair);color:var(--muted)}}
+.footer-bottom em{font-family:var(--f-display);color:var(--butter);font-style:italic}
+:root[data-theme="dark"] .footer-bottom em,
+@media (prefers-color-scheme: dark){.footer-bottom em{color:var(--persimmon)}}
+
+/* ─────────────────────────────  MODAL (dish detail)  ───────────────────────────── */
+.modal-backdrop{
+  position:fixed;inset:0;background:color-mix(in oklab, var(--ink) 60%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:80;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal-backdrop.open{opacity:1;pointer-events:auto}
+.modal{
+  background:var(--ground);border:1px solid var(--hair);border-radius:24px;
+  width:min(680px, 100%);max-height:calc(100vh - 40px);overflow:auto;
+  transform:translateY(20px) scale(.96);transition:transform .35s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 40px 80px color-mix(in oklab, var(--ink) 50%, transparent);
+  position:relative;
+}
+.modal-backdrop.open .modal{transform:none}
+.modal-close{
+  position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--hair);z-index:3;
+  display:inline-flex;align-items:center;justify-content:center;font-size:20px;
+  transition:background .2s ease;
+}
+.modal-close:hover{background:var(--surface-2)}
+.modal-media{
+  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:160px;
+  border-radius:24px 24px 0 0;
+}
+.modal-body{padding:32px 32px 36px;display:flex;flex-direction:column;gap:20px}
+.modal-body .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.modal-body h3{font-size:34px;line-height:1.05;font-style:italic;font-weight:600;letter-spacing:-.02em}
+.modal-body .mprice{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--persimmon);font-weight:600;white-space:nowrap}
+.modal-body .mdesc{color:var(--ink-2);font-size:16px;line-height:1.6}
+.modal-body .ming{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.modal-body .ming .lbl{color:var(--persimmon);font-family:var(--f-display);font-style:italic;font-size:16px}
+.modal-body .ming ul{
+  display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;
+}
+.modal-body .ming li{
+  background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:8px 14px;
+  font-size:13px;color:var(--ink-2);
+}
+.modal-body .mfoot{
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px;
+  padding-top:20px;border-top:1px solid var(--hair);
+}
+.qty{
+  display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--surface);
+}
+.qty button{width:38px;height:38px;font-size:18px;font-weight:600;color:var(--ink)}
+.qty span{min-width:30px;text-align:center;font-weight:600;font-size:15px}
+
+/* ─────────────────────────────  CART DRAWER  ───────────────────────────── */
+.cart-back{
+  position:fixed;inset:0;background:color-mix(in oklab, var(--ink) 55%, transparent);
+  backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:70;
+}
+.cart-back.open{opacity:1;pointer-events:auto}
+.cart{
+  position:fixed;top:0;right:0;bottom:0;width:min(440px, 100%);background:var(--ground);
+  border-left:1px solid var(--hair);
+  transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:75;
+  display:flex;flex-direction:column;
+}
+.cart.open{transform:none}
+.cart-head{padding:24px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair)}
+.cart-head h3{font-family:var(--f-display);font-style:italic;font-size:26px;font-weight:600}
+.cart-list{flex:1;overflow:auto;padding:12px 20px 20px}
+.cart-empty{padding:56px 24px;text-align:center;color:var(--muted);font-size:15px}
+.cart-empty span{display:block;font-size:56px;margin-bottom:14px;opacity:.4}
+.cart-item{
+  display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:center;
+  padding:16px 8px;border-bottom:1px solid var(--hair);
+}
+.cart-item:last-child{border-bottom:0}
+.cart-item .ci-media{
+  width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;
+}
+.cart-item .ci-body{display:flex;flex-direction:column;gap:4px}
+.cart-item .ci-name{font-family:var(--f-display);font-size:15px;line-height:1.15;font-weight:600}
+.cart-item .ci-controls{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:12px}
+.cart-item .ci-qty{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--surface)}
+.cart-item .ci-qty button{width:26px;height:26px;font-size:14px;color:var(--ink)}
+.cart-item .ci-qty span{min-width:20px;text-align:center;font-size:13px;font-weight:600}
+.cart-item .ci-price{font-family:var(--f-display);font-style:italic;font-size:15px;color:var(--persimmon);font-weight:600}
+.cart-item .ci-remove{color:var(--muted);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+.cart-item .ci-remove:hover{color:var(--clay)}
+
+.cart-foot{padding:20px 24px 26px;border-top:1px solid var(--hair);background:var(--surface)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.cart-total .lbl{font-size:13px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.cart-total .val{font-family:var(--f-display);font-style:italic;font-size:32px;font-weight:600;color:var(--ink)}
+.cart-checkout{
+  width:100%;padding:18px;border-radius:999px;background:var(--persimmon);color:#fff;font-weight:600;font-size:16px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 12px 30px color-mix(in oklab, var(--persimmon) 45%, transparent);
+  transition:transform .2s ease, background .2s ease;
+}
+.cart-checkout:hover{transform:translateY(-2px);background:var(--persimmon-2)}
+.cart-checkout:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.cart-mini-note{text-align:center;color:var(--muted);font-size:12px;margin-top:12px;line-height:1.5}
+
+/* Floating WA button */
+.fab-wa{
+  position:fixed;bottom:24px;right:24px;z-index:55;
+  width:60px;height:60px;border-radius:999px;background:#25D366;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px color-mix(in oklab, #25D366 40%, transparent);
+  transition:transform .25s ease;
+}
+.fab-wa:hover{transform:scale(1.08)}
+.fab-wa svg{width:28px;height:28px}
+@media (max-width: 640px){.fab-wa{bottom:18px;right:18px;width:54px;height:54px}}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:30px;transform:translate(-50%, 40px);
+  background:var(--forest);color:#F1EEDD;padding:14px 22px;border-radius:999px;
+  font-size:14px;font-weight:600;z-index:65;opacity:0;pointer-events:none;
+  transition:transform .35s ease, opacity .35s ease;
+  box-shadow:0 12px 30px color-mix(in oklab, var(--forest) 50%, transparent);
+  display:flex;align-items:center;gap:10px;
+}
+.toast.show{opacity:1;transform:translate(-50%, 0)}
+:root[data-theme="dark"] .toast,
+@media (prefers-color-scheme: dark){.toast{background:var(--persimmon);color:#fff}}
+
+/* Accessibility */
+:focus-visible{outline:2px solid var(--persimmon);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════  NAV  ═══════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Betina Potap · Alimentos Naturales">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span><em>Betina</em> Potap <small>Alimentos naturales</small></span>
+    </a>
+    <button class="hamb" aria-label="Menú" id="hamb">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Principal">
+      <a href="#proteico">Proteico</a>
+      <a href="#naturista">Naturista</a>
+      <a href="#empresas">Empresas</a>
+      <a href="#historia">Historia</a>
+      <a href="#envios">Envíos & FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">
+        <svg id="tsun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></svg>
+      </button>
+      <button class="cart-btn" id="cartBtn" aria-label="Ver carrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6L18 2z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════  HERO  ═══════════════════════════ -->
+<section id="top">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker"><span class="dot"></span> <span>Hecho a mano en CABA · lunes a viernes</span></div>
+        <h1>Comida <em>honesta,</em> hecha con tiempo.</h1>
+        <p class="lead">Dos menús rotativos: <strong>proteico</strong> para los que entrenan y no quieren pensar el almuerzo, y <strong>naturista</strong> sin gluten, sin lácteos ni azúcar añadida. Cocinado en cocina propia, entregado en tu barrio.</p>
+        <div class="cta-row">
+          <a href="#proteico" class="btn btn-primary">
+            Ver el menú
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#empresas" class="btn btn-ghost">Para empresas</a>
+        </div>
+        <div class="hero-meta">
+          <div class="mi"><strong>+40</strong>platos únicos</div>
+          <div class="mi"><strong>24 h</strong>de anticipación</div>
+          <div class="mi"><strong>CABA</strong>envíos a domicilio</div>
+        </div>
+      </div>
+      <div class="plates" aria-hidden="true">
+        <div class="plate p1" data-parallax="0.4">🥗<div class="ptag">Bowl salmón</div><div class="ppr">$18.000</div></div>
+        <div class="plate p2" data-parallax="0.6">🥦<div class="ptag">Veggie burger</div><div class="ppr">$11.000</div></div>
+        <div class="plate p3" data-parallax="0.5">🍫<div class="ptag">Brownie</div><div class="ppr">$4.000</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Sin gluten &nbsp;·&nbsp; sin lácteos &nbsp;·&nbsp; sin azúcar añadida &nbsp;·&nbsp; <b>hecho a mano</b> &nbsp;·&nbsp; cocinado hoy &nbsp;·&nbsp; entregado mañana &nbsp;·&nbsp; envíos en CABA &nbsp;·&nbsp; <b>desde 2019</b> &nbsp;·&nbsp;</span>
+    <span>Sin gluten &nbsp;·&nbsp; sin lácteos &nbsp;·&nbsp; sin azúcar añadida &nbsp;·&nbsp; <b>hecho a mano</b> &nbsp;·&nbsp; cocinado hoy &nbsp;·&nbsp; entregado mañana &nbsp;·&nbsp; envíos en CABA &nbsp;·&nbsp; <b>desde 2019</b> &nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════  VALUES  ═══════════════════════════ -->
+<section class="values">
+  <div class="wrap">
+    <div class="values-head reveal">
+      <h2>Comida como <em>la de tu casa</em>, sin las horas de cocinar.</h2>
+      <p>No somos delivery ni son viandas industriales. Cocinamos platos frescos en cantidades chicas, a pedido, con ingredientes reales. Sin conservantes raros ni etiquetas largas.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value reveal">
+        <span class="vico">🌾</span>
+        <span class="vnum">01</span>
+        <h3>Menú naturista</h3>
+        <p>Sin gluten, sin lácteos y sin azúcar añadida. Panes, tartas, pizzetas, snacks y postres pensados para no resignar el placer de comer bien.</p>
+      </div>
+      <div class="value reveal">
+        <span class="vico">💪</span>
+        <span class="vnum">02</span>
+        <h3>Menú proteico</h3>
+        <p>Porciones generosas con la proteína en el centro: bowls, pollos, pescados, wraps. Para semanas ocupadas donde el almuerzo no puede ser un tema.</p>
+      </div>
+      <div class="value reveal">
+        <span class="vico">🚚</span>
+        <span class="vnum">03</span>
+        <h3>Fresco, no congelado</h3>
+        <p>Confirmás el pedido hoy, lo preparamos mañana. Llega en el día pactado, listo para comer o para calentar y disfrutar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  PROTEICO  ═══════════════════════════ -->
+<section class="menu-section" id="proteico">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div>
+        <div class="lbl">01 — La proteína en el centro</div>
+        <h2>Menú <em>proteico</em></h2>
+      </div>
+      <div></div>
+      <p>Bowls, pollos y pescados con hidratos inteligentes. Ideal para semana laboral. Tocá cualquier plato para ver los ingredientes.</p>
+    </div>
+    <div class="dish-grid" id="proteicoGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  NATURISTA  ═══════════════════════════ -->
+<section class="menu-section" id="naturista">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div>
+        <div class="lbl">02 — Sin gluten · sin lácteos · sin azúcar</div>
+        <h2>Menú <em>naturista</em></h2>
+      </div>
+      <div></div>
+      <p>Panes, tartas, snacks, postres y básicos de despensa para llevar a tu casa. Hechos como la vieja escuela.</p>
+    </div>
+    <div class="dish-grid" id="naturistaGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  EMPRESAS  ═══════════════════════════ -->
+<section class="empresas" id="empresas">
+  <div class="wrap">
+    <div class="emp-grid">
+      <div class="reveal">
+        <div class="eyebrow">Draling · Para empresas</div>
+        <h2>Viandas <em>frescas</em> para tu equipo.</h2>
+        <p class="lead">Cuidamos al equipo con menú semanal rotativo, opciones proteicas y naturistas, y entrega los días que elijas. Sin contratos eternos ni pedidos mínimos absurdos: probá una semana y decidí.</p>
+        <ul class="emp-benefits">
+          <li>Menú rotativo semanal (cambian los platos)</li>
+          <li>Opciones celíacas y sin lácteos siempre</li>
+          <li>Facturación A / responsable inscripto</li>
+          <li>Entrega mañana o mediodía en oficina</li>
+          <li>Descuento por volumen desde 15 viandas</li>
+          <li>Plan mensual con día fijo (—10 %)</li>
+        </ul>
+        <a href="#" class="btn btn-persim" data-cart-checkout data-empresa="true">
+          Pedir propuesta por WhatsApp
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="emp-card reveal">
+        <h3>Planes</h3>
+        <div class="emp-plan">
+          <div class="emp-plan-name">Pack Semanal · Chico<small>Hasta 10 viandas · 1 día por semana</small></div>
+          <div class="emp-plan-price">$110.000</div>
+        </div>
+        <div class="emp-plan">
+          <div class="emp-plan-name">Pack Semanal · Mediano<small>11 a 25 viandas · 1 a 2 días por semana</small></div>
+          <div class="emp-plan-price">$210.000</div>
+        </div>
+        <div class="emp-plan">
+          <div class="emp-plan-name">Pack Semanal · Grande<small>+25 viandas · a medida</small></div>
+          <div class="emp-plan-price">A medida</div>
+        </div>
+        <div class="emp-plan">
+          <div class="emp-plan-name">Plan Mensual<small>Compromiso mensual · —10 % de descuento</small></div>
+          <div class="emp-plan-price">—10 %</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  STORY  ═══════════════════════════ -->
+<section class="story" id="historia">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-visual reveal" aria-hidden="true"></div>
+      <div class="reveal">
+        <div class="eyebrow" style="color:var(--persimmon)">La historia</div>
+        <h2>Un negocio familiar que empezó cocinando <em>lo que faltaba.</em></h2>
+        <p>Betina empezó a cocinar sin gluten para su familia cuando encontrar opciones ricas era casi imposible. Con los años, la cocina de casa creció y hoy alimentamos a decenas de familias, oficinas y personas que entrenan en toda CABA.</p>
+        <p>Los ingredientes son los mismos que usamos en nuestra propia mesa: reales, sin conservantes raros, con etiquetas cortas. Si nosotros no lo comeríamos, no lo vendemos.</p>
+        <span class="sig">— Betina</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  ENVIOS + FAQ  ═══════════════════════════ -->
+<section class="envios" id="envios">
+  <div class="wrap">
+    <div class="envios-grid">
+      <div class="reveal">
+        <div class="eyebrow">Envíos</div>
+        <h2>Todo <em>a tu puerta,</em> en CABA.</h2>
+        <p class="lead">Hacemos entregas en toda la ciudad. Pedidos confirmados antes de las 12 hs se preparan y se entregan al día siguiente.</p>
+      </div>
+      <div class="faq reveal">
+        <details open>
+          <summary>¿Cómo hago un pedido?</summary>
+          <p>Elegí los platos de la web, agregalos al carrito y confirmá por WhatsApp. Cuando recibimos el mensaje coordinamos día y forma de pago.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto sale el envío?</summary>
+          <p>Depende del barrio. Te lo confirmamos cuando cerrás el pedido por WhatsApp. Desde $2.500 en zona céntrica, un poco más en zonas alejadas.</p>
+        </details>
+        <details>
+          <summary>¿Qué formas de pago aceptan?</summary>
+          <p>Transferencia, efectivo al recibir y Mercado Pago. Para empresas: facturación A y cuenta corriente.</p>
+        </details>
+        <details>
+          <summary>¿Puedo pedir algo que no esté en la web?</summary>
+          <p>Sí. El menú es una guía, pero cocinamos a pedido para eventos, dietas específicas y viandas corporativas. Escribinos por WhatsApp y lo armamos juntos.</p>
+        </details>
+        <details>
+          <summary>¿Son aptos para celíacos?</summary>
+          <p>Todo el menú naturista es sin gluten y se prepara en zona controlada de la cocina. Si sos celíaco diagnosticado, avisanos y reforzamos protocolo.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  FINAL CTA  ═══════════════════════════ -->
+<section class="final">
+  <div class="wrap reveal">
+    <h2><em>¿Armamos</em> tu pedido?</h2>
+    <p>Elegí lo que se te antoje, sumalo al carrito y en un mensaje coordinamos todo. Sin apps, sin comisiones raras.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a href="#proteico" class="btn btn-primary">Empezar por proteico</a>
+      <a href="#naturista" class="btn btn-ghost">Ir al naturista</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════  FOOTER  ═══════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span><em>Betina</em> Potap <small>Alimentos naturales</small></span></div>
+        <p class="fabout">Comida real, cocinada a mano en Buenos Aires. Menú proteico y naturista sin gluten, sin lácteos ni azúcar añadida.</p>
+      </div>
+      <div>
+        <h4>Menú</h4>
+        <a href="#proteico">Proteico</a>
+        <a href="#naturista">Naturista</a>
+        <a href="#empresas">Para empresas</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="#" id="waFooter">WhatsApp</a>
+        <a href="mailto:hola@betinapotap.com">hola@betinapotap.com</a>
+        <a href="https://instagram.com/betinapotap.alimentosnaturales" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <a href="#envios">Envíos</a>
+        <a href="#envios">Formas de pago</a>
+        <a href="#historia">Historia</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="yr"></span> Betina Potap · Alimentos Naturales</div>
+      <div>Landing por <em>Draling</em> — automatización con IA</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="#" id="fabWA" class="fab-wa" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.677 4.52 1.849 6.353L4 29l7.85-1.799A11.933 11.933 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16.001 3zm0 21.6c-1.94 0-3.755-.562-5.28-1.53l-.379-.24-4.66 1.067 1.086-4.523-.247-.39A9.55 9.55 0 016.4 15c0-5.298 4.303-9.6 9.6-9.6 5.298 0 9.6 4.302 9.6 9.6 0 5.297-4.302 9.6-9.6 9.6zm5.28-7.104c-.29-.145-1.712-.844-1.977-.941-.265-.096-.458-.144-.65.145-.194.29-.748.94-.917 1.133-.169.193-.338.217-.628.072-.29-.144-1.22-.45-2.323-1.435-.858-.766-1.437-1.712-1.605-2.002-.169-.29-.018-.446.127-.591.13-.13.29-.338.435-.507.145-.169.194-.29.29-.483.097-.193.048-.362-.024-.507-.072-.145-.65-1.567-.892-2.146-.235-.564-.474-.487-.65-.497l-.554-.01c-.192 0-.507.073-.772.362-.265.29-1.014.99-1.014 2.412 0 1.422 1.037 2.795 1.181 2.988.145.194 2.04 3.113 4.945 4.365.691.299 1.23.477 1.651.61.694.222 1.325.19 1.824.115.556-.083 1.712-.7 1.953-1.375.242-.675.242-1.254.169-1.375-.072-.121-.265-.194-.554-.338z"/></svg>
+</a>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastText">Agregado al carrito</span>
+</div>
+
+<!-- Modal for dish detail -->
+<div class="modal-backdrop" id="modalBack" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-media" id="mMedia" aria-hidden="true">🥗</div>
+    <div class="modal-body">
+      <div class="mhead">
+        <h3 id="mTitle"></h3>
+        <div class="mprice" id="mPrice"></div>
+      </div>
+      <p class="mdesc" id="mDesc"></p>
+      <div class="ming">
+        <span class="lbl">Ingredientes</span>
+        <ul id="mIngredients"></ul>
+      </div>
+      <div class="ming" id="mFormatWrap" style="display:none">
+        <span class="lbl">Formatos</span>
+        <ul id="mFormats"></ul>
+      </div>
+      <div class="mfoot">
+        <div class="qty">
+          <button id="qMinus" aria-label="Menos">−</button>
+          <span id="qVal">1</span>
+          <button id="qPlus" aria-label="Más">+</button>
+        </div>
+        <button class="btn btn-primary" id="mAdd">
+          Agregar al carrito
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart drawer -->
+<div class="cart-back" id="cartBack"></div>
+<aside class="cart" id="cart" aria-label="Carrito de pedido">
+  <div class="cart-head">
+    <h3>Tu pedido</h3>
+    <button class="modal-close" style="position:static" id="cartClose" aria-label="Cerrar carrito">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-list" id="cartList">
+    <div class="cart-empty" id="cartEmpty">
+      <span>🌿</span>
+      El carrito está vacío. Elegí algo del menú para empezar.
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span class="lbl">Total estimado</span>
+      <span class="val" id="cartTotal">$0</span>
+    </div>
+    <button class="cart-checkout" id="cartCheckout" disabled>
+      Confirmar pedido por WhatsApp
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.677 4.52 1.849 6.353L4 29l7.85-1.799A11.933 11.933 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16.001 3z"/></svg>
+    </button>
+    <p class="cart-mini-note">Te contactamos para coordinar día de entrega y forma de pago. No se cobra nada online.</p>
+  </div>
+</aside>
+
+<script>
+/* ─────────────  DATA  ───────────── */
+const WHATSAPP = "5491126146803"; // TODO: reemplazar con el WhatsApp real de Betina
+const MENU = [
+  // PROTEICO
+  {id:"bowl-salmon", cat:"proteico", n:"Bowl salmón", p:18000, u:"$18.000", emoji:"🥗", palette:"m-salmon",
+    d:"Salmón grillado sobre base de arroz yamaní, palta cremosa y verdes de estación. Nuestro plato insignia.",
+    ing:["Salmón grillado","Arroz yamaní","Palta","Edamame","Zanahoria","Semillas de sésamo","Jengibre","Salsa de soja natural"]},
+  {id:"pollo-mediterraneo", cat:"proteico", n:"Pollo mediterráneo", p:15000, u:"$15.000", emoji:"🍗", palette:"m-butter",
+    d:"Suprema jugosa con tomate cherry, aceitunas negras y hierbas frescas. Aroma a Grecia en tu almuerzo.",
+    ing:["Pechuga de pollo","Tomate cherry","Aceitunas negras","Alcaparras","Ajo","Orégano fresco","Aceite de oliva extra virgen"]},
+  {id:"pollo-thai", cat:"proteico", n:"Pollo thai", p:15000, u:"$15.000", emoji:"🍛", palette:"m-butter",
+    d:"Pollo en salsa cremosa de leche de coco, cilantro y lima. Servido con arroz basmati.",
+    ing:["Pollo","Leche de coco","Cilantro fresco","Lima","Jengibre","Arroz basmati","Brotes","Curry suave"]},
+  {id:"pollo-crispy", cat:"proteico", n:"Pollo crispy", p:15000, u:"$15.000", emoji:"🍗", palette:"m-clay",
+    d:"Pechuga rebozada en almendras molidas y semillas, horneada (no frita). Crocante afuera, jugosa adentro.",
+    ing:["Pechuga de pollo","Harina de almendras","Semillas de sésamo","Semillas de girasol","Huevo","Especias"]},
+  {id:"omelette", cat:"proteico", n:"Omelette con verduras", p:12000, u:"$12.000", emoji:"🍳", palette:"m-butter",
+    d:"Tortilla francesa esponjosa con salteado de espinaca, tomate y cebolla. Un clásico bien hecho.",
+    ing:["Huevos frescos","Espinaca","Tomate","Cebolla","Queso magro","Aceite de oliva"]},
+  {id:"bowl-veggie", cat:"proteico", n:"Bowl veggie", p:12000, u:"$12.000", emoji:"🥙", palette:"m-forest",
+    d:"Grain bowl con quinoa, garbanzos y todas las verduras que caben. La proteína viene de las legumbres.",
+    ing:["Quinoa","Garbanzos","Palta","Hummus","Tomate cherry","Pepino","Semillas","Aceite de oliva"]},
+  {id:"wrap-proteico", cat:"proteico", n:"Wrap proteico", p:14000, u:"$14.000", emoji:"🌯", palette:"m-wheat",
+    d:"Wrap integral relleno de pollo grillado, palta, tomate y lechuga. Portable, rico y llenador.",
+    ing:["Wrap integral","Pollo grillado","Palta","Tomate","Lechuga","Yogur natural"]},
+  {id:"ensalada-atun-quinoa", cat:"proteico", n:"Ensalada de atún y quinoa", p:14000, u:"$14.000", emoji:"🥗", palette:"m-forest",
+    d:"Atún en aceite de oliva sobre quinoa fresca, con vegetales crocantes y aderezo de limón.",
+    ing:["Atún en aceite de oliva","Quinoa","Tomate cherry","Palta","Pepino","Limón","Aceite de oliva"]},
+  {id:"hamburguesas-merluza", cat:"proteico", n:"Hamburguesas de merluza", p:15000, u:"$15.000", emoji:"🍔", palette:"m-cream",
+    d:"Hamburguesas de merluza fresca amasadas con avena y hierbas. Vienen 2 por porción.",
+    ing:["Merluza","Avena","Huevo","Cebolla","Perejil","Especias","Limón"]},
+  {id:"shakshuka", cat:"proteico", n:"Shakshuka", p:12000, u:"$12.000", emoji:"🍅", palette:"m-tomato",
+    d:"Huevos escalfados en una salsa profunda de tomate, morrones y especias del Medio Oriente.",
+    ing:["Huevos","Tomate","Morrón rojo","Cebolla","Ajo","Comino","Paprika","Aceite de oliva"]},
+  {id:"tarta-pollo-calabaza", cat:"proteico", n:"Tarta de pollo y calabaza", p:14000, u:"$14.000", emoji:"🥧", palette:"m-wheat",
+    d:"Tarta con masa integral, relleno de pollo desmenuzado y calabaza asada. Muy reconfortante.",
+    ing:["Masa integral","Pollo","Calabaza asada","Cebolla","Huevo","Queso semiduro","Especias"]},
+  {id:"cheesecake-proteico", cat:"proteico", n:"Cheesecake proteico", p:10000, u:"$10.000", emoji:"🧀", palette:"m-cream",
+    d:"Cheesecake con base de almendras y crema de queso proteica endulzada con eritritol. Sin culpa.",
+    ing:["Queso crema magro","Proteína de whey vainilla","Base de almendras","Eritritol","Huevo","Limón"]},
+  {id:"mousse-chocolate", cat:"proteico", n:"Mousse de chocolate proteico", p:10000, u:"$10.000", emoji:"🍫", palette:"m-cocoa",
+    d:"Mousse cremoso de cacao con proteína en polvo y leche vegetal. Rico como el clásico, mejor perfil.",
+    ing:["Cacao puro","Proteína de whey chocolate","Leche de almendras","Endulzante natural","Cacao amargo"]},
+  {id:"parfait", cat:"proteico", n:"Parfait", p:10000, u:"$10.000", emoji:"🍨", palette:"m-plum",
+    d:"Yogur natural con capas de granola casera y frutos rojos. Ideal para desayuno o merienda.",
+    ing:["Yogur natural","Granola casera","Frutos rojos","Miel","Semillas de chía"]},
+
+  // NATURISTA
+  {id:"pan-sarraceno", cat:"naturista", n:"Pan de trigo sarraceno", p:12000, u:"$12.000", emoji:"🍞", palette:"m-wheat", gluten:true,
+    d:"Pan de masa madre 100% trigo sarraceno. Sin gluten, con textura densa y sabor tostado.",
+    ing:["Harina de trigo sarraceno","Agua","Masa madre","Sal marina"]},
+  {id:"pan-lino", cat:"naturista", n:"Pan de lino", p:12000, u:"$12.000", emoji:"🍞", palette:"m-wheat", gluten:true,
+    d:"Pan alto en fibra con semillas de lino molidas y enteras. Sin harinas refinadas.",
+    ing:["Semillas de lino","Harina de arroz","Huevo","Aceite de oliva","Sal marina"]},
+  {id:"pan-mijo", cat:"naturista", n:"Pan de mijo", p:12000, u:"$12.000", emoji:"🍞", palette:"m-wheat", gluten:true,
+    d:"Pan rústico de mijo dorado. Ideal para tostadas y sándwiches livianos.",
+    ing:["Harina de mijo","Agua","Masa madre","Sal marina","Aceite de oliva"]},
+  {id:"pan-almendras", cat:"naturista", n:"Pan de almendras", p:14000, u:"$14.000", emoji:"🥖", palette:"m-cream", gluten:true,
+    d:"Pan bajo en carbohidratos, alto en proteína. Estilo keto pero con sabor real.",
+    ing:["Harina de almendras","Huevos","Psyllium","Sal marina","Aceite de coco"]},
+  {id:"bagels", cat:"naturista", n:"Bagels (docena)", p:12000, u:"$12.000", emoji:"🥯", palette:"m-wheat", gluten:true,
+    d:"Docena de bagels chicos con semillas de sésamo. Sin gluten. Perfectos para congelar y tostar.",
+    ing:["Harina sin gluten","Huevo","Semillas de sésamo","Sal marina","Levadura"]},
+  {id:"veggie-burger", cat:"naturista", n:"Veggie burger", p:11000, u:"$11.000", emoji:"🍔", palette:"m-forest", gluten:true,
+    d:"Hamburguesa de garbanzos y quinoa con especias. Firmes, sabrosas, aptas para grillar. Variante quinoa y zanahoria: $12.000.",
+    ing:["Garbanzos","Quinoa","Zanahoria","Cebolla","Avena sin gluten","Especias","Perejil"]},
+  {id:"souffle", cat:"naturista", n:"Soufflé", p:10000, u:"$10.000", emoji:"🥧", palette:"m-forest", gluten:true,
+    d:"Soufflé esponjoso de brócoli o espinaca (según disponibilidad). Sin harinas comunes.",
+    ing:["Brócoli / espinaca","Huevos","Harina de arroz","Especias","Aceite de oliva"]},
+  {id:"tarta-sarraceno", cat:"naturista", n:"Tarta de trigo sarraceno", p:12000, u:"$12.000", emoji:"🥧", palette:"m-wheat", gluten:true,
+    d:"Tarta salada con base de sarraceno y relleno de verduras de estación.",
+    ing:["Harina de trigo sarraceno","Huevo","Verduras de estación","Aceite de oliva","Especias"]},
+  {id:"milanesas-girgolas", cat:"naturista", n:"Milanesas de gírgolas", p:12000, u:"$12.000", emoji:"🍄", palette:"m-cocoa", gluten:true,
+    d:"Milanesas veganas de hongos gírgolas rebozadas en harina de garbanzos. Vienen 1/4 kg. Formato 1/2 kg: $20.000.",
+    ing:["Gírgolas","Harina de garbanzos","Especias","Sal marina","Aceite de girasol alto oleico"]},
+  {id:"empanada-sarraceno", cat:"naturista", n:"Empanada de trigo sarraceno", p:4000, u:"$4.000 c/u · $40.000 docena", emoji:"🥟", palette:"m-wheat", gluten:true,
+    d:"Empanadas con masa de trigo sarraceno. Rellenos rotativos (carne, pollo, verdura). Consultá disponibilidad.",
+    ing:["Harina de trigo sarraceno","Relleno de temporada","Cebolla","Especias","Aceite de oliva"]},
+  {id:"pizzetas-coliflor", cat:"naturista", n:"Pizzetas de coliflor", p:10000, u:"3 x $10.000 · 6 x $18.000", emoji:"🍕", palette:"m-tomato", gluten:true,
+    d:"Pizzetas con base de coliflor rallada, sin harina. Salsa de tomate y hierbas. Vienen 3 por porción.",
+    ing:["Coliflor rallada","Huevo","Queso de castañas de cajú","Salsa de tomate","Orégano","Aceite de oliva"]},
+  {id:"tortillas", cat:"naturista", n:"Tortillas / Fajitas", p:17000, u:"12 u. $17.000", emoji:"🌮", palette:"m-butter", gluten:true,
+    d:"Docena de tortillas chicas sin gluten, ideales para wraps, tacos o fajitas.",
+    ing:["Harina de arroz","Agua","Sal marina","Aceite de oliva"]},
+  {id:"hummus", cat:"naturista", n:"Hummus de garbanzos", p:9000, u:"pote $9.000 · porción 100g $10.000", emoji:"🥣", palette:"m-cream", gluten:true,
+    d:"Hummus cremoso hecho con garbanzos cocidos en casa. Pote familiar o porción individual.",
+    ing:["Garbanzos","Tahini","Limón","Ajo","Aceite de oliva","Comino"]},
+  {id:"garbanzos-tostados", cat:"naturista", n:"Garbanzos tostados", p:7000, u:"$7.000", emoji:"🥜", palette:"m-clay", gluten:true,
+    d:"Snack crocante de garbanzos horneados con especias. Perfectos para picar.",
+    ing:["Garbanzos","Aceite de oliva","Paprika","Comino","Sal marina"]},
+  {id:"crackers", cat:"naturista", n:"Crackers", p:9000, u:"1/4 $9.000 · 1/2 $16.000", emoji:"🍪", palette:"m-cream", gluten:true,
+    d:"Crackers súper crocantes de semillas variadas. Ideales con hummus, quesos o solos.",
+    ing:["Semillas de chía","Semillas de girasol","Semillas de zapallo","Harina de linaza","Sal marina"]},
+  {id:"granola", cat:"naturista", n:"Granola", p:10000, u:"250g $10.000 · 500g $18.000", emoji:"🥣", palette:"m-butter", gluten:true,
+    d:"Granola casera con frutos secos, semillas y un toque de sirope de arce. Sin azúcar refinada.",
+    ing:["Avena sin gluten","Almendras","Nueces","Semillas","Aceite de coco","Sirope de arce"]},
+  {id:"budin", cat:"naturista", n:"Budín", p:12000, u:"$12.000", emoji:"🍰", palette:"m-cream", gluten:true,
+    d:"Budín húmedo con harina de almendras. Sabor a naranja o limón según disponibilidad.",
+    ing:["Harina de almendras","Huevos","Aceite de coco","Endulzante natural","Cáscara de cítrico"]},
+  {id:"brownie", cat:"naturista", n:"Brownie", p:4000, u:"$4.000 c/u · $13.000 x4", emoji:"🍫", palette:"m-cocoa", gluten:true,
+    d:"Brownie fudge intenso, sin harinas ni azúcar refinada. El que probás y no te das cuenta que es sano.",
+    ing:["Cacao puro","Harina de almendras","Huevos","Dátiles","Aceite de coco","Chips de cacao"]},
+  {id:"barrita", cat:"naturista", n:"Barrita", p:3000, u:"$3.000 c/u · $29.000 x12", emoji:"🍫", palette:"m-cocoa", gluten:true,
+    d:"Barrita energética compacta para llevar. Ideal para post-entrenamiento o merienda rápida.",
+    ing:["Avena sin gluten","Nueces","Dátiles","Semillas","Cacao"]},
+  {id:"pancakes", cat:"naturista", n:"Pancakes de banana y cacao", p:5000, u:"x4 $5.000 · x12 $9.000", emoji:"🥞", palette:"m-butter", gluten:true,
+    d:"Pancakes chicos de banana y cacao. Sin harina ni azúcar, sólo el dulzor natural de la banana.",
+    ing:["Banana","Huevo","Cacao","Harina de almendras","Canela"]},
+  {id:"datiles-rellenos", cat:"naturista", n:"Dátiles rellenos", p:5000, u:"x4 $5.000 · x12 $9.000", emoji:"🍬", palette:"m-cocoa", gluten:true,
+    d:"Dátiles medjool rellenos de manteca de maní o almendras y cubiertos de coco rallado.",
+    ing:["Dátiles medjool","Manteca de maní / almendras","Coco rallado","Cacao"]},
+  {id:"bomboncitos", cat:"naturista", n:"Bomboncitos", p:7000, u:"x4 $7.000 · x12 $16.000", emoji:"🍬", palette:"m-cocoa", gluten:true,
+    d:"Bombones raw con cacao, dátiles y frutos secos. Sin azúcar, sin leche, sin gluten.",
+    ing:["Cacao puro","Dátiles","Almendras","Coco","Aceite de coco"]},
+  {id:"crocante-dulce", cat:"naturista", n:"Crocante dulce", p:7000, u:"x4 $7.000 · x12 $16.000", emoji:"🍭", palette:"m-butter", gluten:true,
+    d:"Crocante de semillas y frutos secos caramelizados con endulzante natural.",
+    ing:["Almendras","Semillas de girasol","Semillas de zapallo","Miel / sirope de arce"]},
+  {id:"blend-mate", cat:"naturista", n:"Blend de hierbas para mate", p:6000, u:"100g $6.000 · 200g $13.000", emoji:"🌿", palette:"m-moss", gluten:true,
+    d:"Blend rotativo de hierbas serranas para mezclar con la yerba. Suaviza el sabor y suma digestivas.",
+    ing:["Yerba mate","Peperina","Menta","Boldo","Cedrón"]},
+  {id:"gomasio", cat:"naturista", n:"Gomasio", p:7500, u:"$7.500", emoji:"🧂", palette:"m-cream", gluten:true,
+    d:"Condimento japonés de sésamo tostado con sal marina. Reemplaza la sal con más sabor y minerales.",
+    ing:["Semillas de sésamo tostadas","Sal marina"]},
+  {id:"rawmesan", cat:"naturista", n:"Rawmesan", p:8000, u:"$8.000", emoji:"🧀", palette:"m-butter", gluten:true,
+    d:"Alternativa vegana al parmesano rallado. Espectacular sobre pastas, ensaladas o vegetales asados.",
+    ing:["Castañas de cajú","Levadura nutricional","Ajo en polvo","Sal marina"]}
+];
+
+/* ─────────────  RENDER MENU  ───────────── */
+function el(tag, cls, html){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html !== undefined) e.innerHTML = html;
+  return e;
+}
+function money(n){return "$" + n.toLocaleString("es-AR")}
+
+function renderDish(d){
+  const card = el("button","dish");
+  card.type = "button";
+  card.setAttribute("data-id", d.id);
+  card.setAttribute("aria-label", `Ver ${d.n}, ${d.u}`);
+  card.innerHTML = `
+    <span class="dish-tag ${d.gluten?"gluten":""}">${d.gluten?"Sin gluten":"Proteico"}</span>
+    <div class="dish-media ${d.palette}">${d.emoji}</div>
+    <div class="dish-body">
+      <div class="dish-name">${d.n}</div>
+      <div class="dish-price">${d.u}</div>
+    </div>
+    <span class="dish-add" aria-hidden="true">+</span>
+  `;
+  card.addEventListener("click", () => openModal(d.id));
+  return card;
+}
+
+const proteicoGrid = document.getElementById("proteicoGrid");
+const naturistaGrid = document.getElementById("naturistaGrid");
+MENU.forEach(d => {
+  (d.cat === "proteico" ? proteicoGrid : naturistaGrid).appendChild(renderDish(d));
+});
+
+/* ─────────────  MODAL  ───────────── */
+const modalBack = document.getElementById("modalBack");
+const modalClose = document.getElementById("modalClose");
+const mTitle = document.getElementById("mTitle");
+const mPrice = document.getElementById("mPrice");
+const mDesc = document.getElementById("mDesc");
+const mIng = document.getElementById("mIngredients");
+const mMedia = document.getElementById("mMedia");
+const qVal = document.getElementById("qVal");
+const qPlus = document.getElementById("qPlus");
+const qMinus = document.getElementById("qMinus");
+const mAdd = document.getElementById("mAdd");
+let currentDish = null;
+let currentQty = 1;
+
+function openModal(id){
+  const d = MENU.find(x => x.id === id);
+  if(!d) return;
+  currentDish = d;
+  currentQty = 1;
+  qVal.textContent = "1";
+  mTitle.textContent = d.n;
+  mPrice.textContent = d.u;
+  mDesc.textContent = d.d;
+  mMedia.textContent = d.emoji;
+  mMedia.className = "modal-media " + d.palette;
+  mIng.innerHTML = "";
+  d.ing.forEach(i => mIng.appendChild(el("li", "", i)));
+  modalBack.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(){
+  modalBack.classList.remove("open");
+  document.body.style.overflow = "";
+  currentDish = null;
+}
+modalClose.addEventListener("click", closeModal);
+modalBack.addEventListener("click", e => { if(e.target === modalBack) closeModal() });
+qPlus.addEventListener("click", () => { currentQty = Math.min(20, currentQty + 1); qVal.textContent = currentQty });
+qMinus.addEventListener("click", () => { currentQty = Math.max(1, currentQty - 1); qVal.textContent = currentQty });
+mAdd.addEventListener("click", () => {
+  if(!currentDish) return;
+  addToCart(currentDish.id, currentQty);
+  closeModal();
+});
+
+/* ─────────────  CART  ───────────── */
+const cart = new Map(); // id => qty
+const cartEl = document.getElementById("cart");
+const cartBack = document.getElementById("cartBack");
+const cartList = document.getElementById("cartList");
+const cartEmpty = document.getElementById("cartEmpty");
+const cartCount = document.getElementById("cartCount");
+const cartBtn = document.getElementById("cartBtn");
+const cartTotal = document.getElementById("cartTotal");
+const cartCheckout = document.getElementById("cartCheckout");
+
+function updateCart(){
+  let count = 0, total = 0;
+  cart.forEach((q, id) => {
+    const d = MENU.find(x => x.id === id);
+    if(!d) return;
+    count += q;
+    total += d.p * q;
+  });
+  cartCount.textContent = count;
+  cartBtn.classList.toggle("has-items", count > 0);
+  cartTotal.textContent = money(total);
+  cartCheckout.disabled = count === 0;
+
+  // Rerender list
+  cartList.innerHTML = "";
+  if(count === 0){
+    cartList.appendChild(cartEmpty);
+    return;
+  }
+  cart.forEach((q, id) => {
+    const d = MENU.find(x => x.id === id);
+    if(!d) return;
+    const row = el("div","cart-item");
+    row.innerHTML = `
+      <div class="ci-media ${d.palette}">${d.emoji}</div>
+      <div class="ci-body">
+        <div class="ci-name">${d.n}</div>
+        <div class="ci-controls">
+          <div class="ci-qty">
+            <button data-act="minus" data-id="${d.id}" aria-label="Menos">−</button>
+            <span>${q}</span>
+            <button data-act="plus" data-id="${d.id}" aria-label="Más">+</button>
+          </div>
+          <div class="ci-price">${money(d.p*q)}</div>
+        </div>
+      </div>
+      <button class="ci-remove" data-act="remove" data-id="${d.id}" aria-label="Quitar">Quitar</button>
+    `;
+    cartList.appendChild(row);
+  });
+}
+
+cartList.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]");
+  if(!b) return;
+  const id = b.getAttribute("data-id");
+  const act = b.getAttribute("data-act");
+  const cur = cart.get(id) || 0;
+  if(act === "plus") cart.set(id, cur + 1);
+  else if(act === "minus"){
+    if(cur <= 1) cart.delete(id);
+    else cart.set(id, cur - 1);
+  } else if(act === "remove") cart.delete(id);
+  updateCart();
+});
+
+function addToCart(id, qty){
+  cart.set(id, (cart.get(id) || 0) + qty);
+  updateCart();
+  showToast(`✓ ${qty}× ${MENU.find(x=>x.id===id).n} en el carrito`);
+}
+function openCart(){cartEl.classList.add("open"); cartBack.classList.add("open"); document.body.style.overflow = "hidden"}
+function closeCart(){cartEl.classList.remove("open"); cartBack.classList.remove("open"); document.body.style.overflow = ""}
+cartBtn.addEventListener("click", openCart);
+cartBack.addEventListener("click", closeCart);
+document.getElementById("cartClose").addEventListener("click", closeCart);
+
+/* ─────────────  CHECKOUT via WhatsApp  ───────────── */
+function checkoutMessage(){
+  let msg = "Hola Betina! Quiero hacer este pedido:\n\n";
+  let total = 0;
+  cart.forEach((q, id) => {
+    const d = MENU.find(x => x.id === id);
+    if(!d) return;
+    msg += `• ${q}× ${d.n} — ${money(d.p*q)}\n`;
+    total += d.p * q;
+  });
+  msg += `\nTotal estimado: ${money(total)}\n\n¿Cómo coordinamos el envío?`;
+  return encodeURIComponent(msg);
+}
+cartCheckout.addEventListener("click", () => {
+  if(cart.size === 0) return;
+  window.open(`https://wa.me/${WHATSAPP}?text=${checkoutMessage()}`, "_blank");
+});
+
+// Empresas button
+document.querySelectorAll('[data-cart-checkout]').forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+    const empresa = btn.hasAttribute("data-empresa");
+    let text;
+    if(empresa) text = encodeURIComponent("Hola Betina! Quiero pedir información sobre las viandas para empresas. ¿Me contás cómo son los planes y precios?");
+    else text = checkoutMessage();
+    window.open(`https://wa.me/${WHATSAPP}?text=${text}`, "_blank");
+  });
+});
+document.getElementById("fabWA").addEventListener("click", e => {
+  e.preventDefault();
+  const text = cart.size > 0 ? checkoutMessage() : encodeURIComponent("Hola Betina! Vi la web y quería consultarles algo:");
+  window.open(`https://wa.me/${WHATSAPP}?text=${text}`, "_blank");
+});
+document.getElementById("waFooter").addEventListener("click", e => {
+  e.preventDefault();
+  window.open(`https://wa.me/${WHATSAPP}`, "_blank");
+});
+
+/* ─────────────  TOAST  ───────────── */
+const toast = document.getElementById("toast");
+const toastText = document.getElementById("toastText");
+let toastT;
+function showToast(msg){
+  toastText.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => toast.classList.remove("show"), 2400);
+}
+
+/* ─────────────  THEME  ───────────── */
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("click", () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const nxt = cur === "dark" ? "light" : (cur === "light" ? null : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+  if(nxt) document.documentElement.setAttribute("data-theme", nxt);
+  else document.documentElement.removeAttribute("data-theme");
+});
+
+/* ─────────────  NAV: scrolled + active section  ───────────── */
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 8);
+}, {passive:true});
+
+const sections = ["proteico","naturista","empresas","historia","envios"].map(id => document.getElementById(id));
+const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if(en.isIntersecting){
+      const id = en.target.id;
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#"+id));
+    }
+  });
+}, {rootMargin:"-40% 0px -55% 0px"});
+sections.forEach(s => s && io.observe(s));
+
+/* ─────────────  HAMBURGER  ───────────── */
+const hamb = document.getElementById("hamb");
+const navLinksEl = document.getElementById("navLinks");
+hamb.addEventListener("click", () => navLinksEl.classList.toggle("open"));
+navLinksEl.addEventListener("click", e => {
+  if(e.target.tagName === "A") navLinksEl.classList.remove("open");
+});
+
+/* ─────────────  REVEAL ON SCROLL  ───────────── */
+const revIO = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if(en.isIntersecting){
+      en.target.classList.add("in");
+      revIO.unobserve(en.target);
+    }
+  });
+}, {rootMargin:"0px 0px -12% 0px"});
+document.querySelectorAll(".reveal").forEach(el => revIO.observe(el));
+
+/* ─────────────  HERO PARALLAX (subtle)  ───────────── */
+const plates = document.querySelectorAll(".plate");
+if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    plates.forEach(p => {
+      const k = parseFloat(p.getAttribute("data-parallax")) || 0.4;
+      p.style.transform = `translateY(${y * k * -0.15}px)`;
+    });
+  }, {passive:true});
+}
+
+/* ─────────────  KEYBOARD  ───────────── */
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape"){
+    if(modalBack.classList.contains("open")) closeModal();
+    if(cartEl.classList.contains("open")) closeCart();
+  }
+});
+
+/* ─────────────  YEAR  ───────────── */
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+/* Init */
+updateCart();
+</script>
+</body>
+</html>
