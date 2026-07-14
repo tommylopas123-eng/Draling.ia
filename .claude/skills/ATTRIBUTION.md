@@ -17,3 +17,13 @@ Revisadas el 2026-06-23: solo contienen instrucciones Markdown (sin scripts ejec
 | canvas-design (+ canvas-fonts) | https://github.com/anthropics/skills | Apache 2.0 |
 
 canvas-design: solo metodología de diseño (Markdown) + fuentes tipográficas (.ttf). Sin scripts ejecutables.
+
+## Skills de animación / motion (agregadas 2026-07-14)
+| Skills | Repo fuente | Licencia |
+|--------|-------------|----------|
+| emil-design-eng, review-animations, improve-animations, animation-vocabulary, apple-design | https://github.com/emilkowalski/skills | MIT (© 2026 Emil Kowalski) |
+
+Filosofía de animación y diseño de interfaces de Emil Kowalski (creador de Sonner
+y Vaul, ex-Vercel/Linear). Solo instrucciones Markdown, sin scripts ejecutables.
+Aplicadas a `betina-landing/`: curvas de easing custom, press feedback en botones,
+stagger, hovers gated en touch, duraciones bajo 300ms.

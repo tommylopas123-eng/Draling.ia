@@ -37,6 +37,11 @@
   --max: 1240px;
   --pad-x: clamp(20px, 4vw, 56px);
   --radius: 20px;
+
+  /* motion — Emil Kowalski easing curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);       /* enter/exit UI */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);   /* on-screen movement */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);    /* iOS-like drawer */
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -161,9 +166,12 @@ body::before{
 .nav-actions{display:flex;align-items:center;gap:6px}
 .theme-btn,.cart-btn{
   width:40px;height:40px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--hair);background:var(--surface);transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  border:1px solid var(--hair);background:var(--surface);transition:transform .16s var(--ease-out), background .2s var(--ease-out), border-color .2s var(--ease-out);
 }
-.theme-btn:hover,.cart-btn:hover{background:var(--surface-2);border-color:color-mix(in oklab, var(--ink) 15%, var(--hair))}
+.theme-btn:active,.cart-btn:active,.hamb:active{transform:scale(0.92)}
+@media (hover: hover) and (pointer: fine){
+  .theme-btn:hover,.cart-btn:hover{background:var(--surface-2);border-color:color-mix(in oklab, var(--ink) 15%, var(--hair))}
+}
 .cart-btn{position:relative}
 .cart-btn .badge{
   position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;
@@ -204,15 +212,22 @@ body::before{
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:16px 28px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:-.005em;
-  transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
+  transition:transform .2s var(--ease-out), background .2s var(--ease-out), box-shadow .2s var(--ease-out), color .2s var(--ease-out);
 }
+.btn:active{transform:scale(0.97)}
 .btn-primary{background:var(--forest);color:var(--surface);box-shadow: 0 10px 24px color-mix(in oklab, var(--forest) 30%, transparent)}
-.btn-primary:hover{transform:translateY(-2px);background:var(--forest-2);box-shadow: 0 14px 30px color-mix(in oklab, var(--forest) 40%, transparent)}
-.btn-ghost{color:var(--ink);border:1px solid var(--hair)}
-.btn-ghost:hover{background:var(--surface-2)}
 .btn-persim{background:var(--persimmon);color:#fff;box-shadow: 0 10px 24px color-mix(in oklab, var(--persimmon) 40%, transparent)}
-.btn-persim:hover{transform:translateY(-2px);background:var(--persimmon-2)}
-.btn svg{width:16px;height:16px}
+.btn-ghost{color:var(--ink);border:1px solid var(--hair)}
+.btn svg{width:16px;height:16px;transition:transform .2s var(--ease-out)}
+@media (hover: hover) and (pointer: fine){
+  .btn-primary:hover{transform:translateY(-2px);background:var(--forest-2);box-shadow: 0 14px 30px color-mix(in oklab, var(--forest) 40%, transparent)}
+  .btn-primary:hover svg{transform:translateX(3px)}
+  .btn-persim:hover{transform:translateY(-2px);background:var(--persimmon-2)}
+  .btn-persim:hover svg{transform:translateX(3px)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  /* keep press feedback winning over hover lift */
+  .btn:active{transform:scale(0.97)}
+}
 
 .hero-meta{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap;color:var(--muted);font-size:13px}
 .hero-meta strong{display:block;font-family:var(--f-display);font-size:22px;color:var(--ink);font-weight:600;font-style:italic;line-height:1}
@@ -328,22 +343,26 @@ body::before{
   background:var(--surface);border:1px solid var(--hair);border-radius:var(--radius);padding:18px 18px 20px;
   display:flex;flex-direction:column;gap:12px;
   position:relative;overflow:hidden;
-  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease;
+  transition:transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s var(--ease-out);
   cursor:pointer;
   text-align:left;
 }
-.dish:hover{
-  transform:translateY(-4px);
-  box-shadow: 0 20px 40px -18px color-mix(in oklab, var(--ink) 40%, transparent);
-  border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));
-}
+.dish:active{transform:scale(0.98)}
 .dish-media{
   aspect-ratio:1/1;border-radius:14px;
   display:flex;align-items:center;justify-content:center;font-size:64px;
   position:relative;overflow:hidden;
-  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  transition:transform .5s var(--ease-out);
 }
-.dish:hover .dish-media{transform:scale(1.04)}
+@media (hover: hover) and (pointer: fine){
+  .dish:hover{
+    transform:translateY(-4px);
+    box-shadow: 0 20px 40px -18px color-mix(in oklab, var(--ink) 40%, transparent);
+    border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));
+  }
+  .dish:active{transform:scale(0.98)}
+  .dish:hover .dish-media{transform:scale(1.04)}
+}
 .dish-media::after{
   content:"";position:absolute;inset:auto 0 -30% 0;height:60%;
   background:radial-gradient(60% 100% at 50% 100%, color-mix(in oklab, var(--ink) 22%, transparent), transparent 70%);
@@ -366,11 +385,18 @@ body::before{
   width:38px;height:38px;border-radius:999px;background:var(--forest);color:var(--surface);
   display:inline-flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;line-height:1;
   opacity:0;transform:translateY(6px);
-  transition:opacity .25s ease, transform .25s ease, background .2s ease;
+  transition:opacity .25s var(--ease-out), transform .25s var(--ease-out), background .2s var(--ease-out);
   z-index:3;
 }
-.dish:hover .dish-add{opacity:1;transform:translateY(0)}
-.dish-add:hover{background:var(--persimmon)}
+@media (hover: hover) and (pointer: fine){
+  .dish:hover .dish-add{opacity:1;transform:translateY(0)}
+  .dish-add:hover{background:var(--persimmon)}
+}
+
+/* Stagger: dishes cascade in when a menu page renders */
+@keyframes dishIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.dish-grid .dish{animation:dishIn .5s var(--ease-out) backwards;animation-delay:calc(var(--i, 0) * 35ms)}
+@media (prefers-reduced-motion: reduce){.dish-grid .dish{animation:none}}
 
 /* Palette variations per dish media */
 .m-salmon{background:radial-gradient(circle at 30% 30%, #FBD1B0, #E38560 60%, #8f3f21 100%)}
@@ -578,7 +604,8 @@ body::before{
 .dish-hero .buy .qty{
   display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--ground);
 }
-.dish-hero .buy .qty button{width:42px;height:42px;font-size:20px;font-weight:600;color:var(--ink)}
+.dish-hero .buy .qty button{width:42px;height:42px;font-size:20px;font-weight:600;color:var(--ink);transition:transform .12s var(--ease-out)}
+.dish-hero .buy .qty button:active{transform:scale(0.85)}
 .dish-hero .buy .qty span{min-width:34px;text-align:center;font-weight:600;font-size:16px;font-variant-numeric:tabular-nums}
 .dish-hero .buy .btn{flex:1;justify-content:center;min-width:180px}
 
@@ -689,9 +716,12 @@ body::before{
 .back-btn{
   display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;
   border:1px solid var(--hair);background:var(--surface);font-weight:600;font-size:14px;
-  transition:background .2s ease, transform .2s ease;
+  transition:background .2s var(--ease-out), transform .2s var(--ease-out);
 }
-.back-btn:hover{background:var(--surface-2);transform:translateX(-3px)}
+.back-btn:active{transform:scale(0.97)}
+@media (hover: hover) and (pointer: fine){
+  .back-btn:hover{background:var(--surface-2);transform:translateX(-3px)}
+}
 .back-btn svg{width:14px;height:14px}
 
 /* ─────────────────────────────  CART DRAWER  ───────────────────────────── */
@@ -703,7 +733,7 @@ body::before{
 .cart{
   position:fixed;top:0;right:0;bottom:0;width:min(440px, 100%);background:var(--ground);
   border-left:1px solid var(--hair);
-  transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:75;
+  transform:translateX(100%);transition:transform .45s var(--ease-drawer);z-index:75;
   display:flex;flex-direction:column;
 }
 .cart.open{transform:none}
@@ -724,7 +754,8 @@ body::before{
 .cart-item .ci-name{font-family:var(--f-display);font-size:15px;line-height:1.15;font-weight:600}
 .cart-item .ci-controls{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:12px}
 .cart-item .ci-qty{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;background:var(--surface)}
-.cart-item .ci-qty button{width:26px;height:26px;font-size:14px;color:var(--ink)}
+.cart-item .ci-qty button{width:26px;height:26px;font-size:14px;color:var(--ink);transition:transform .12s var(--ease-out)}
+.cart-item .ci-qty button:active{transform:scale(0.82)}
 .cart-item .ci-qty span{min-width:20px;text-align:center;font-size:13px;font-weight:600}
 .cart-item .ci-price{font-family:var(--f-display);font-style:italic;font-size:15px;color:var(--persimmon);font-weight:600}
 .cart-item .ci-remove{color:var(--muted);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
@@ -738,9 +769,12 @@ body::before{
   width:100%;padding:18px;border-radius:999px;background:var(--persimmon);color:#fff;font-weight:600;font-size:16px;
   display:flex;align-items:center;justify-content:center;gap:10px;
   box-shadow:0 12px 30px color-mix(in oklab, var(--persimmon) 45%, transparent);
-  transition:transform .2s ease, background .2s ease;
+  transition:transform .18s var(--ease-out), background .2s var(--ease-out);
 }
-.cart-checkout:hover{transform:translateY(-2px);background:var(--persimmon-2)}
+.cart-checkout:active{transform:scale(0.98)}
+@media (hover: hover) and (pointer: fine){
+  .cart-checkout:hover{transform:translateY(-2px);background:var(--persimmon-2)}
+}
 .cart-checkout:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .cart-mini-note{text-align:center;color:var(--muted);font-size:12px;margin-top:12px;line-height:1.5}
 
@@ -761,7 +795,7 @@ body::before{
   position:fixed;left:50%;bottom:30px;transform:translate(-50%, 40px);
   background:var(--forest);color:#F1EEDD;padding:14px 22px;border-radius:999px;
   font-size:14px;font-weight:600;z-index:65;opacity:0;pointer-events:none;
-  transition:transform .35s ease, opacity .35s ease;
+  transition:transform .4s var(--ease-out), opacity .4s var(--ease-out);
   box-shadow:0 12px 30px color-mix(in oklab, var(--forest) 50%, transparent);
   display:flex;align-items:center;gap:10px;
 }
@@ -874,15 +908,19 @@ body.loading{overflow:hidden}
   position:relative;padding:44px 40px 48px;border-radius:28px;
   overflow:hidden;
   border:1px solid var(--hair);background:var(--surface);
-  transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+  transition:transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s var(--ease-out);
   display:flex;flex-direction:column;justify-content:flex-end;
   min-height:340px;
   color:var(--ink);
 }
-.mt-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 30px 60px -20px color-mix(in oklab, var(--ink) 40%, transparent);
-  border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));
+.mt-card:active{transform:scale(0.99)}
+@media (hover: hover) and (pointer: fine){
+  .mt-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 30px 60px -20px color-mix(in oklab, var(--ink) 40%, transparent);
+    border-color:color-mix(in oklab, var(--forest) 40%, var(--hair));
+  }
+  .mt-card:active{transform:scale(0.99)}
 }
 .mt-card.mt-proteico{
   background:linear-gradient(160deg, color-mix(in oklab, var(--persimmon) 12%, var(--surface)), var(--surface));
@@ -936,9 +974,10 @@ body.loading{overflow:hidden}
 }
 .menu-tab{
   padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;color:var(--ink-2);
-  transition:background .25s ease, color .25s ease;letter-spacing:-.005em;
+  transition:background .25s var(--ease-out), color .25s var(--ease-out), transform .16s var(--ease-out);letter-spacing:-.005em;
   background:transparent;border:0;cursor:pointer;
 }
+.menu-tab:active{transform:scale(0.95)}
 .menu-tab:hover{color:var(--ink)}
 .menu-tab.active{background:var(--forest);color:var(--surface)}
 :root[data-theme="dark"] .menu-tab.active,
@@ -947,10 +986,9 @@ body.loading{overflow:hidden}
 /* ═══════════════  CINEMA DISH HOVER  ═══════════════ */
 .dish{transform:translateZ(0)}
 .dish .dish-media{
-  transition:transform .9s cubic-bezier(.22,1,.36,1);
+  transition:transform .9s var(--ease-out);
   will-change:transform;
 }
-.dish:hover .dish-media{transform:scale(1.14) rotate(-2deg)}
 .dish .dish-media::before{
   content:"";position:absolute;inset:-10%;
   background:radial-gradient(circle at 30% 30%, color-mix(in oklab, #fff 30%, transparent) 0%, transparent 55%);
@@ -961,23 +999,26 @@ body.loading{overflow:hidden}
   0%,100%{transform:scale(1) translate(0,0)}
   50%{transform:scale(1.25) translate(-5%, -5%)}
 }
-@media (prefers-reduced-motion: reduce){.dish .dish-media::before{animation:none}.dish:hover .dish-media{transform:scale(1.04)}}
+@media (prefers-reduced-motion: reduce){.dish .dish-media::before{animation:none}}
 
 .dish-overlay{
   position:absolute;inset:0;
   background:linear-gradient(180deg, transparent 40%, color-mix(in oklab, var(--ink) 78%, transparent) 100%);
   display:flex;align-items:flex-end;padding:20px;
-  opacity:0;transition:opacity .35s ease;
+  opacity:0;transition:opacity .35s var(--ease-out);
   z-index:2;pointer-events:none;border-radius:var(--radius);
 }
-.dish:hover .dish-overlay{opacity:1}
 .dish-overlay .oview{
   color:#F1EEDD;font-family:var(--f-display);font-style:italic;font-size:17px;font-weight:600;
   display:flex;align-items:center;gap:8px;transform:translateY(6px);
-  transition:transform .35s ease;
+  transition:transform .35s var(--ease-out);
 }
-.dish:hover .dish-overlay .oview{transform:none}
 .dish-overlay .oview svg{width:15px;height:15px}
+@media (hover: hover) and (pointer: fine){
+  .dish:hover .dish-media{transform:scale(1.14) rotate(-2deg)}
+  .dish:hover .dish-overlay{opacity:1}
+  .dish:hover .dish-overlay .oview{transform:none}
+}
 
 /* Accessibility */
 :focus-visible{outline:2px solid var(--persimmon);outline-offset:3px;border-radius:6px}
@@ -1563,7 +1604,11 @@ function renderMenuView(cat){
     </div>
   `;
   const grid = menuView.querySelector("#menuGrid");
-  MENU.filter(d => d.cat === cat).forEach(d => grid.appendChild(renderDish(d)));
+  MENU.filter(d => d.cat === cat).forEach((d, i) => {
+    const c = renderDish(d);
+    c.style.setProperty("--i", i);
+    grid.appendChild(c);
+  });
 
   // Tabs
   menuView.querySelectorAll(".menu-tab").forEach(t => {
@@ -1759,7 +1804,11 @@ function renderDishPage(id){
 
   // Similar grid (reuse card render)
   const simGrid = dishView.querySelector("#similarGrid");
-  similar.forEach(sd => simGrid.appendChild(renderDish(sd)));
+  similar.forEach((sd, i) => {
+    const c = renderDish(sd);
+    c.style.setProperty("--i", i);
+    simGrid.appendChild(c);
+  });
 
   // Wire up interactive elements
   const dpMinus = dishView.querySelector("#dpMinus");
