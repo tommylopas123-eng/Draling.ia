@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- impeccable-disable overused-font -- Fraunces italic (ejes opsz+SOFT) elegida a proposito como voz editorial de una marca de comida; no es el default Inter/slate-900 -->
+<!-- impeccable-disable numbered-section-markers -- 01/02/03 solo en "Proceso": es una secuencia real (Elegis -> Cocinamos -> Llega); los 10/11/12 son cantidades de copy (viandas), no marcadores -->
+
 <title>Betina Potap — Alimentos Naturales · CABA</title>
 <meta name="description" content="Comida saludable, hecha a mano en CABA. Menú proteico + menú naturista sin gluten, sin lácteos ni azúcar. Envíos por WhatsApp." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1030,7 +1033,7 @@ body.loading{overflow:hidden}
 <div class="intro-curtain" id="introCurtain" aria-hidden="true">
   <div class="icx">
     <em>Betina Potap</em>
-    <small>Alimentos naturales — Buenos Aires</small>
+    <small>Alimentos naturales · Buenos Aires</small>
     <span class="dot"></span>
   </div>
 </div>
@@ -1140,19 +1143,16 @@ body.loading{overflow:hidden}
     <div class="value-grid">
       <div class="value reveal">
         <span class="vico">🌾</span>
-        <span class="vnum">01</span>
         <h3>Menú naturista</h3>
         <p>Sin gluten, sin lácteos y sin azúcar añadida. Panes, tartas, pizzetas, snacks y postres pensados para no resignar el placer de comer bien.</p>
       </div>
       <div class="value reveal">
         <span class="vico">💪</span>
-        <span class="vnum">02</span>
         <h3>Menú proteico</h3>
         <p>Porciones generosas con la proteína en el centro: bowls, pollos, pescados, wraps. Para semanas ocupadas donde el almuerzo no puede ser un tema.</p>
       </div>
       <div class="value reveal">
         <span class="vico">🚚</span>
-        <span class="vnum">03</span>
         <h3>Fresco, no congelado</h3>
         <p>Confirmás el pedido hoy, lo preparamos mañana. Llega en el día pactado, listo para comer o para calentar y disfrutar.</p>
       </div>
@@ -1170,7 +1170,6 @@ body.loading{overflow:hidden}
     </div>
     <div class="mt-grid">
       <a href="#/menu/proteico" class="mt-card mt-proteico reveal" data-nav-menu="proteico">
-        <div class="mt-tag">01</div>
         <div class="mt-inner">
           <div class="eyebrow">Menú proteico</div>
           <h3><em>La proteína</em> en el centro.</h3>
@@ -1181,7 +1180,6 @@ body.loading{overflow:hidden}
         </div>
       </a>
       <a href="#/menu/naturista" class="mt-card mt-naturista reveal" data-nav-menu="naturista">
-        <div class="mt-tag">02</div>
         <div class="mt-inner">
           <div class="eyebrow">Menú naturista</div>
           <h3><em>Sin gluten,</em> sin lácteos, sin azúcar.</h3>
@@ -1209,7 +1207,7 @@ body.loading{overflow:hidden}
           <li>Facturación A / responsable inscripto</li>
           <li>Entrega mañana o mediodía en oficina</li>
           <li>Descuento por volumen desde 15 viandas</li>
-          <li>Plan mensual con día fijo (—10 %)</li>
+          <li>Plan mensual con día fijo (10 % off)</li>
         </ul>
         <a href="#" class="btn btn-persim" data-cart-checkout data-empresa="true">
           Pedir propuesta por WhatsApp
@@ -1231,8 +1229,8 @@ body.loading{overflow:hidden}
           <div class="emp-plan-price">A medida</div>
         </div>
         <div class="emp-plan">
-          <div class="emp-plan-name">Plan Mensual<small>Compromiso mensual · —10 % de descuento</small></div>
-          <div class="emp-plan-price">—10 %</div>
+          <div class="emp-plan-name">Plan Mensual<small>Compromiso mensual · 10 % de descuento</small></div>
+          <div class="emp-plan-price">10 % off</div>
         </div>
       </div>
     </div>
@@ -1331,7 +1329,7 @@ body.loading{overflow:hidden}
     </div>
     <div class="footer-bottom">
       <div>© <span id="yr"></span> Betina Potap · Alimentos Naturales</div>
-      <div>Landing por <em>Draling</em> — automatización con IA</div>
+      <div>Landing por <em>Draling</em> · automatización con IA</div>
     </div>
   </div>
 </footer>
@@ -1597,7 +1595,7 @@ function renderMenuView(cat){
           </div>
           <div class="footer-bottom">
             <div>© ${new Date().getFullYear()} Betina Potap · Alimentos Naturales</div>
-            <div>Landing por <em>Draling</em> — automatización con IA</div>
+            <div>Landing por <em>Draling</em> · automatización con IA</div>
           </div>
         </div>
       </footer>
@@ -1705,7 +1703,7 @@ function renderDishPage(id){
 
     <div class="wrap dish-block">
       <div class="bhead">
-        <span class="num">01 — Lo que lleva</span>
+        <span class="num">Lo que lleva</span>
         <h2>Ingredientes</h2>
       </div>
       <div class="ing-grid">
@@ -1716,7 +1714,7 @@ function renderDishPage(id){
     ${d.u.includes("·") ? `
     <div class="wrap dish-block">
       <div class="bhead">
-        <span class="num">02 — Elegí tu formato</span>
+        <span class="num">Elegí tu formato</span>
         <h2>Formatos y precios</h2>
       </div>
       <div class="fmt-list">
@@ -1733,7 +1731,7 @@ function renderDishPage(id){
 
     <div class="wrap dish-block">
       <div class="bhead">
-        <span class="num">${d.u.includes("·") ? "03" : "02"} — Cómo lo hacemos</span>
+        <span class="num">Cómo lo hacemos</span>
         <h2>Preparación & frescura</h2>
       </div>
       <div class="prep-grid">
@@ -1757,7 +1755,7 @@ function renderDishPage(id){
 
     <div class="wrap dish-block">
       <div class="bhead">
-        <span class="num">${d.u.includes("·") ? "04" : "03"} — Te puede gustar</span>
+        <span class="num">Te puede gustar</span>
         <h2>Del mismo menú</h2>
       </div>
       <div class="similar-grid" id="similarGrid"></div>
@@ -1796,7 +1794,7 @@ function renderDishPage(id){
         </div>
         <div class="footer-bottom">
           <div>© ${new Date().getFullYear()} Betina Potap · Alimentos Naturales</div>
-          <div>Landing por <em>Draling</em> — automatización con IA</div>
+          <div>Landing por <em>Draling</em> · automatización con IA</div>
         </div>
       </div>
     </footer>
