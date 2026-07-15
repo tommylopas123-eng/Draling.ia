@@ -852,21 +852,17 @@ function renderDish(id){
   dishView.querySelector("#dm").addEventListener("click",()=>{dqty=Math.max(1,dqty-1);dq.textContent=dqty});
   dishView.querySelector("#dp").addEventListener("click",()=>{dqty=Math.min(20,dqty+1);dq.textContent=dqty});
   dishView.querySelector("#dadd").addEventListener("click",()=>addCart(d.id,dqty));
-  // nav links
-  dishView.querySelectorAll("[data-nav]").forEach(a=>a.addEventListener("click",e=>{
-    e.preventDefault();const href=a.getAttribute("href");
-    if(a.dataset.nav==="cat")showHome(href);else showHome(href&&href!=="#"?href:null);
-  }));
+  // (in-page anchor clicks handled by the global delegated handler)
   document.title=`${d.n} · Betina Potap`;
   return true;
 }
-function goDish(id){if(!renderDish(id))return;scrollMem=window.scrollY;home.hidden=true;dishView.hidden=false;window.scrollTo({top:0,behavior:"instant"});history.pushState({dish:id},"",`#/plato/${id}`)}
+function goDish(id){if(!renderDish(id))return;scrollMem=window.scrollY;home.hidden=true;dishView.hidden=false;window.scrollTo({top:0,behavior:"instant"});try{history.pushState({dish:id},"",`#/plato/${id}`)}catch(_){}}
 function showHome(anchor){
   const was=!dishView.hidden;
   dishView.hidden=true;dishView.innerHTML="";home.hidden=false;
   document.title="Betina Potap · Cocina saludable en CABA";
-  if(anchor){requestAnimationFrame(()=>{const t=document.querySelector(anchor);t?t.scrollIntoView({behavior:"instant",block:"start"}):window.scrollTo({top:0});});history.pushState({},"",anchor)}
-  else{window.scrollTo({top:was?scrollMem||0:0,behavior:"instant"});if(location.hash.startsWith("#/plato/"))history.pushState({},"",location.pathname+location.search)}
+  if(anchor){requestAnimationFrame(()=>{const t=document.querySelector(anchor);t?t.scrollIntoView({behavior:"instant",block:"start"}):window.scrollTo({top:0});});try{history.pushState({},"",anchor)}catch(_){}}
+  else{window.scrollTo({top:was?scrollMem||0:0,behavior:"instant"});try{if(location.hash.startsWith("#/plato/"))history.pushState({},"",location.pathname+location.search)}catch(_){}}
 }
 function route(){
   const m=location.hash.match(/^#\/plato\/([\w-]+)$/);
@@ -884,10 +880,25 @@ new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const id=en.t
 const hamb=document.getElementById("hamb"),navLinks=document.getElementById("navLinks");
 hamb.addEventListener("click",()=>navLinks.classList.toggle("open"));
 navLinks.addEventListener("click",e=>{if(e.target.tagName==="A")navLinks.classList.remove("open")});
-document.querySelectorAll(".nav-links a, #brand, .footer a[href^='#']").forEach(a=>a.addEventListener("click",e=>{
-  const href=a.getAttribute("href");if(!href||!href.startsWith("#")||href.startsWith("#/"))return;
-  if(!dishView.hidden){e.preventDefault();showHome(href==="#top"?null:href)}
-}));
+/* Single delegated handler for in-page anchors. Sandbox-safe: never changes location
+   (claude.ai artifacts block hash/URL navigation with a "forbidden" screen). */
+function scrollToId(id){
+  const rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const t=id?document.getElementById(id):null;
+  if(t)t.scrollIntoView({behavior:rm?"auto":"smooth",block:"start"});
+  else window.scrollTo({top:0,behavior:rm?"auto":"smooth"});
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest?e.target.closest('a[href^="#"]'):null;
+  if(!a)return;
+  const href=a.getAttribute("href");
+  if(!href||href.startsWith("#/"))return;
+  e.preventDefault();
+  navLinks.classList.remove("open");
+  const id=(href==="#"||href==="#top")?null:href.slice(1);
+  if(!dishView.hidden)showHome(id?("#"+id):null);
+  else scrollToId(id);
+});
 
 /* ---- THEME ---- */
 document.getElementById("themeBtn").addEventListener("click",()=>{
