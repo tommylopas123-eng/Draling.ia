@@ -858,31 +858,40 @@
     if(pItems.length) requestAnimationFrame(ploop);
   })();
 
-  // Splash de entrada (breve, respeta reduced-motion)
+  // Splash de entrada (breve, respeta reduced-motion). Blindado: si algo
+  // falla por cualquier motivo, se quita el splash de inmediato y no bloquea la pagina.
   (function(){
     var splash = document.getElementById('splash');
     if(!splash) return;
-    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(rm || sessionStorage.getItem('ec-splashed')){ splash.remove(); return; }
-    document.body.classList.add('splashing');
-    var numEl = document.getElementById('splashNum'), barEl = document.getElementById('splashBar');
-    var t0 = performance.now(), DUR = 1300;
-    function tick(now){
-      var p = Math.min(1, (now - t0) / DUR);
-      var e = 1 - Math.pow(1 - p, 3);
-      var v = Math.round(e * 100);
-      numEl.textContent = v;
-      barEl.style.width = (e * 100).toFixed(1) + '%';
-      if(p < 1){ requestAnimationFrame(tick); }
-      else {
-        setTimeout(function(){
-          splash.classList.add('out');
-          setTimeout(function(){ splash.remove(); document.body.classList.remove('splashing'); }, 580);
-        }, 160);
+    var FALLBACK_MS = 2500;
+    var safety = setTimeout(function(){
+      try{ splash.remove(); document.body.classList.remove('splashing'); }catch(_){ }
+    }, FALLBACK_MS);
+    try{
+      var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(rm){ clearTimeout(safety); splash.remove(); return; }
+      document.body.classList.add('splashing');
+      var numEl = document.getElementById('splashNum'), barEl = document.getElementById('splashBar');
+      var t0 = performance.now(), DUR = 1300;
+      function tick(now){
+        try{
+          var p = Math.min(1, (now - t0) / DUR);
+          var e = 1 - Math.pow(1 - p, 3);
+          var v = Math.round(e * 100);
+          numEl.textContent = v;
+          barEl.style.width = (e * 100).toFixed(1) + '%';
+          if(p < 1){ requestAnimationFrame(tick); }
+          else {
+            clearTimeout(safety);
+            setTimeout(function(){
+              splash.classList.add('out');
+              setTimeout(function(){ splash.remove(); document.body.classList.remove('splashing'); }, 580);
+            }, 160);
+          }
+        }catch(_){ clearTimeout(safety); splash.remove(); document.body.classList.remove('splashing'); }
       }
-    }
-    requestAnimationFrame(tick);
-    try{ sessionStorage.setItem('ec-splashed','1'); }catch(_){ }
+      requestAnimationFrame(tick);
+    }catch(_){ clearTimeout(safety); splash.remove(); document.body.classList.remove('splashing'); }
   })();
 
   // Contadores numéricos al entrar en vista (métricas y valores del panel)
