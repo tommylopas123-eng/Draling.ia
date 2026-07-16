@@ -127,6 +127,103 @@
         1020,
         420
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "estudio-c",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-verificacion",
+      "name": "Verificación Webhook (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        640
+      ],
+      "webhookId": "estudio-c-verificacion"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Verifica el handshake de Meta (hub.mode / hub.verify_token / hub.challenge)\n// IMPORTANTE: este VERIFY_TOKEN tiene que ser IDENTICO al que pongas en Meta\n// (WhatsApp > Configuration > Webhook > Verify token). Podes usar cualquier palabra.\nconst VERIFY_TOKEN = 'estudioc123';\n\nconst q = ($input.first().json.query) || {};\nconst ok = q['hub.mode'] === 'subscribe' && q['hub.verify_token'] === VERIFY_TOKEN;\nreturn [{ json: { ok, challenge: q['hub.challenge'] || '' } }];\n"
+      },
+      "id": "chequear-token",
+      "name": "Chequear token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "cond-token-ok",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "token-valido",
+      "name": "¿Token válido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        740,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.challenge }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "responder-ok",
+      "name": "Responder OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Forbidden",
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "id": "responder-forbidden",
+      "name": "Responder Forbidden",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        740
+      ]
     }
   ],
   "connections": {
@@ -167,6 +264,46 @@
           }
         ],
         []
+      ]
+    },
+    "Verificación Webhook (GET)": {
+      "main": [
+        [
+          {
+            "node": "Chequear token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chequear token": {
+      "main": [
+        [
+          {
+            "node": "¿Token válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Token válido?": {
+      "main": [
+        [
+          {
+            "node": "Responder OK",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Forbidden",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
