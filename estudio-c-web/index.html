@@ -268,6 +268,39 @@
   .foot-bottom p,.foot-bottom a{color:var(--faint);font-size:13px}
   .foot-bottom a:hover{color:var(--ink)}
 
+  /* Logo Estudio C */
+  .logo-ec{width:36px;height:36px;flex:none;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
+  .brand .bt{display:flex;flex-direction:column;line-height:1.05}
+  .brand-sub{font-family:var(--f-body);font-size:8.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+
+  /* Statement con constelación interactiva */
+  .stmt{position:relative;overflow:hidden;border-radius:24px;padding:clamp(60px,8vw,110px) 28px;text-align:center;
+    background:radial-gradient(120% 120% at 50% 0%, var(--surface-2), var(--canvas) 85%);border:1px solid var(--line-soft);margin-bottom:70px}
+  .stmt canvas{position:absolute;inset:0;width:100%;height:100%}
+  .stmt .st-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+  .stmt .eyebrow{display:inline-block;background:var(--red-tint);color:var(--red-bright);padding:8px 16px;border-radius:999px;letter-spacing:.14em}
+  .stmt h2{font-size:clamp(30px,5.2vw,54px);margin-top:22px}
+  .stmt h2 em{color:var(--red);font-style:normal}
+  .stmt p{color:var(--muted);margin-top:20px;max-width:56ch;margin-left:auto;margin-right:auto}
+
+  /* Muro de clientes */
+  .wall-label{text-align:center;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:34px}
+  .logo-wall{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 40px;max-width:900px;margin:0 auto 78px}
+  .logo-wall span{font-family:var(--f-display);font-weight:700;font-size:clamp(16px,2.2vw,21px);letter-spacing:-.01em;
+    color:color-mix(in oklch,var(--ink) 42%,transparent);transition:color .25s var(--ease);cursor:default;line-height:1.6}
+  .logo-wall span:hover{color:var(--ink)}
+
+  /* Testimonios */
+  .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:980px;margin:0 auto}
+  .testi{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:18px;padding:34px 32px;display:flex;flex-direction:column;box-shadow:0 30px 60px -48px #000}
+  .testi .q{font-family:var(--f-display);font-size:44px;line-height:.6;color:var(--red);margin-bottom:18px}
+  .testi blockquote{font-size:16px;line-height:1.7;color:var(--ink);flex:1}
+  .testi .who{margin-top:24px;padding-top:20px;border-top:1px solid var(--line-soft)}
+  .testi .who b{display:block;font-family:var(--f-display);font-size:16px;letter-spacing:-.01em}
+  .testi .who span{font-size:13px;color:var(--faint);line-height:1.5;display:block;margin-top:3px}
+  .rev.in .testi:nth-child(2){transition-delay:.12s}
+  @media(max-width:860px){.testi-grid{grid-template-columns:1fr;max-width:520px}}
+
   /* Splash */
   #splash{position:fixed;inset:0;z-index:200;background:var(--canvas);color:var(--ink);
     transition:opacity .55s var(--ease)}
@@ -346,18 +379,18 @@
 <body>
 
 <div id="splash" aria-hidden="true">
-  <span class="s-brand">Estudio C<b>.</b></span>
+  <span class="s-brand">Estudio C<b>.</b> <span style="display:block;font-family:var(--f-body);font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-top:5px">Learning Network</span></span>
   <span class="s-num" id="splashNum">0</span>
   <span class="s-line"><i id="splashBar"></i></span>
 </div>
 
 <header id="site-header">
   <div class="wrap nav">
-    <a class="brand" href="#inicio" aria-label="Estudio C — inicio"><span class="mark">e<b>.</b></span> Estudio C</a>
+    <a class="brand" href="#inicio" aria-label="Estudio C — inicio"><svg class="logo-ec" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fff"/><text x="32" y="44" text-anchor="middle" font-family="Bricolage,-apple-system,sans-serif" font-weight="700" font-size="40" fill="#14161c">e</text><path d="M10 40 C 26 30, 42 34, 56 22" fill="none" stroke="#E2453A" stroke-width="5" stroke-linecap="round"/></svg><span class="bt">Estudio C<span class="brand-sub">Learning Network</span></span></a>
     <ul class="menu" id="menu">
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#casos">Casos</a></li>
+      <li><a href="#casos">Clientes</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li class="menu-cta"><a class="btn btn--primary" href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20soluci%C3%B3n%20de%20aprendizaje%20para%20mi%20organizaci%C3%B3n." target="_blank" rel="noopener">Hablemos por WhatsApp</a></li>
@@ -393,7 +426,7 @@
   <div class="wrap">
     <div class="hero-metrics rev">
       <div class="metric"><b class="num">50k+</b><span>Personas formadas</span></div>
-      <div class="metric"><b class="num">15+</b><span>Años de experiencia</span></div>
+      <div class="metric"><b class="num">20+</b><span>Años de experiencia</span></div>
       <div class="metric"><b class="num">98%</b><span>Satisfacción de clientes</span></div>
       <div class="metric"><b class="num">24/7</b><span>Soporte estratégico</span></div>
     </div>
@@ -464,8 +497,8 @@
         <p class="desc">Transformamos información técnica o compleja en experiencias digitales fluidas, estéticas y altamente pedagógicas. Usamos el storytelling para conectar emocionalmente con el aprendiz.</p>
         <ul class="olist">
           <li><span class="idx">01</span><span class="t">Producción de cursos multimedia interactivos</span></li>
-          <li><span class="idx">02</span><span class="t">Video learning y micro-learning</span></li>
-          <li><span class="idx">03</span><span class="t">Gamificación y simulaciones</span></li>
+          <li><span class="idx">02</span><span class="t">Video learning, micro-learning y blended learning</span></li>
+          <li><span class="idx">03</span><span class="t">Gamificación, simulaciones y juegos interactivos</span></li>
           <li><span class="idx">04</span><span class="t">Diseño instruccional de alto nivel</span></li>
         </ul>
       </div>
@@ -541,7 +574,7 @@
       </div>
       <div class="dp-foot">
         <div class="metric"><b class="num">50k+</b><span>Personas formadas</span></div>
-        <div class="metric"><b class="num">15+</b><span>Años de experiencia</span></div>
+        <div class="metric"><b class="num">20+</b><span>Años de experiencia</span></div>
         <div class="metric"><b class="num">+100</b><span>Proyectos</span></div>
       </div>
     </div>
@@ -554,7 +587,7 @@
       <div class="rev">
         <span class="eyebrow">Nosotros</span>
         <h2 style="margin-top:14px">Reimaginando el aprendizaje para la era de la IA.</h2>
-        <p>Estudio C nació con una misión clara: cerrar la brecha entre el potencial de las personas y las necesidades cambiantes de las organizaciones.</p>
+        <p>Desde 2005 trabajamos con organizaciones que buscan resultados reales en contextos complejos. Diseñamos, implementamos y gestionamos ecosistemas de aprendizaje a medida, pensados en 360° y orientados a transformar personas, equipos y organizaciones.</p>
         <p>Somos un equipo multidisciplinario de pedagogos, diseñadores, tecnólogos y estrategas apasionados por crear experiencias que transforman mentes y negocios. Creemos que el aprendizaje es la ventaja competitiva más sostenible de cualquier organización.</p>
       </div>
       <div class="about-media rev"><span class="glow"></span><span class="mono">e<b>.</b></span></div>
@@ -574,31 +607,28 @@
 
 <section class="alt" id="casos">
   <div class="wrap">
-    <div class="sec-head rev">
-      <h2>Casos de Éxito</h2>
-      <p class="lead">Proyectos que demuestran cómo una estrategia de aprendizaje bien ejecutada puede transformar una organización.</p>
+    <div class="stmt rev">
+      <canvas id="constellation" aria-hidden="true"></canvas>
+      <div class="st-inner">
+        <span class="eyebrow">Desde 2005</span>
+        <h2>Resultados <em>reales</em>, en contextos complejos.</h2>
+        <p>Diseñamos e implementamos proyectos de aprendizaje de alta complejidad. Porque cuando el aprendizaje está bien diseñado, se nota en los resultados.</p>
+      </div>
     </div>
-    <div class="case-grid">
-      <article class="case rev">
-        <div class="case-top"><span class="case-tag">AI &amp; Future Skills</span><span class="glow"></span><span class="big-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"/></svg></span></div>
-        <div class="case-body"><span class="org">Banco Regional Líder</span><h3>Transformación Digital en Banca</h3>
-          <p>Diseñamos un programa de reskilling masivo para 5.000 colaboradores, integrando IA generativa en sus procesos de atención al cliente y back-office.</p>
-          <ul class="kpis"><li><span class="dot"></span>+40% de eficiencia operativa</li><li><span class="dot"></span>92% de tasa de adopción</li><li><span class="dot"></span>-30% en tiempo de respuesta</li></ul>
-        </div>
+
+    <p class="wall-label rev">Diseñamos aprendizaje de alta complejidad para</p>
+    <div class="logo-wall rev"><span>Accenture</span><span>ExxonMobil</span><span>Banco Santander</span><span>Zurich</span><span>Clorox</span><span>Telecom</span><span>Clarín</span><span>Cablevisión</span><span>Fundación Telefónica</span><span>Mercer</span><span>Avon</span><span>Tenaris</span><span>TotalEnergies</span></div>
+
+    <div class="testi-grid rev">
+      <article class="testi">
+        <span class="q">&ldquo;</span>
+        <blockquote>Además de haber logrado los objetivos del negocio, se realizó en un muy breve lapso de tiempo. Demostró la capacidad de ejecución, de sopesar problemas y de encontrar soluciones que tuvo este equipo formado por empleados de Esso y Estudio C.</blockquote>
+        <div class="who"><b>Florentino Gorleri</b><span>Americas South Training Manager · Argentina Area Convenience Retailing Cluster Manager</span></div>
       </article>
-      <article class="case rev">
-        <div class="case-top"><span class="case-tag">Learning Operations</span><span class="glow"></span><span class="big-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8M16 7h4M4 12h4M12 12h8M4 17h11M19 17h1"/><circle cx="14" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg></span></div>
-        <div class="case-body"><span class="org">Tech Multinacional</span><h3>Ecosistema de Aprendizaje Global</h3>
-          <p>Implementación de un LXP centralizado para 12 países, unificando la cultura de aprendizaje y optimizando costos de licencias.</p>
-          <ul class="kpis"><li><span class="dot"></span>Unificación de 12 plataformas</li><li><span class="dot"></span>-25% en costos operativos</li><li><span class="dot"></span>Acceso 24/7 multiplataforma</li></ul>
-        </div>
-      </article>
-      <article class="case rev">
-        <div class="case-top"><span class="case-tag">Learning Strategy &amp; Design</span><span class="glow"></span><span class="big-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></span></div>
-        <div class="case-body"><span class="org">Retail Group</span><h3>Academia de Liderazgo Híbrido</h3>
-          <p>Creación de una ruta de formación para mandos medios enfocada en la gestión de equipos remotos y el bienestar organizacional.</p>
-          <ul class="kpis"><li><span class="dot"></span>Mejora del 15% en clima laboral</li><li><span class="dot"></span>100% de líderes capacitados</li><li><span class="dot"></span>Contenidos 100% mobile-first</li></ul>
-        </div>
+      <article class="testi">
+        <span class="q">&ldquo;</span>
+        <blockquote>Qué buena herramienta. De verdad que fue un trabajo muy muy bueno. Fue todo un reto y el resultado fue de lo mejor. Sé que hay más personas involucradas: por favor hacer extensivo a ellos un saludo de agradecimiento.</blockquote>
+        <div class="who"><b>Héctor Moreno</b><span>Lead SSH&amp;E/OIMS Advisor · Retail Support Americas South</span></div>
       </article>
     </div>
   </div>
@@ -644,7 +674,7 @@
   <div class="wrap">
     <div class="foot">
       <div>
-        <span class="brand"><span class="mark">e<b>.</b></span> Estudio C</span>
+        <span class="brand"><svg class="logo-ec" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fff"/><text x="32" y="44" text-anchor="middle" font-family="Bricolage,-apple-system,sans-serif" font-weight="700" font-size="40" fill="#14161c">e</text><path d="M10 40 C 26 30, 42 34, 56 22" fill="none" stroke="#E2453A" stroke-width="5" stroke-linecap="round"/></svg><span class="bt">Estudio C<span class="brand-sub">Learning Network</span></span></span>
         <p class="desc">Consultoría estratégica en aprendizaje organizacional. Transformamos el talento a través de la pedagogía, la tecnología y el diseño.</p>
       </div>
       <div>
@@ -653,11 +683,12 @@
       </div>
       <div>
         <h5>Compañía</h5>
-        <ul><li><a href="#nosotros">Sobre nosotros</a></li><li><a href="#casos">Casos de éxito</a></li><li><a href="#contacto">Contacto</a></li></ul>
+        <ul><li><a href="#nosotros">Sobre nosotros</a></li><li><a href="#casos">Clientes</a></li><li><a href="#contacto">Contacto</a></li></ul>
       </div>
       <div>
         <h5>Contacto</h5>
-        <ul class="contact"><li>Buenos Aires, Argentina · Disponibilidad global</li><li><a href="mailto:estudio.c.info@gmail.com">estudio.c.info@gmail.com</a></li><li><a href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp +54 9 11 2277-9725</a></li></ul>
+        <ul class="contact"><li>Buenos Aires, Argentina · Disponibilidad global</li><li><a href="mailto:estudio.c.info@gmail.com">estudio.c.info@gmail.com</a></li><li><a href="https://wa.me/5491122779725?text=Hola%20Estudio%20C%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener">WhatsApp +54 9 11 2277-9725</a></li>
+          <li><a href="https://www.instagram.com/somos_estudioc/" target="_blank" rel="noopener">Instagram @somos_estudioc</a></li></ul>
       </div>
     </div>
     <div class="foot-bottom">
@@ -856,6 +887,91 @@
       requestAnimationFrame(ploop);
     }
     if(pItems.length) requestAnimationFrame(ploop);
+  })();
+
+  // Constelación interactiva (estética de los posts de IG de la marca)
+  (function(){
+    var canvas = document.getElementById('constellation');
+    if(!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var stars = [], COUNT = 64;
+    var px = 0, py = 0, tx = 0, ty = 0; // parallax suavizado
+
+    function resize(){
+      var r = canvas.parentElement.getBoundingClientRect();
+      W = r.width; H = r.height;
+      canvas.width = W*DPR; canvas.height = H*DPR;
+      canvas.style.width = W+'px'; canvas.style.height = H+'px';
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    function seed(){
+      stars = [];
+      var sd = 7;
+      function rnd(){ sd = (sd*9301+49297)%233280; return sd/233280; }
+      for(var i=0;i<COUNT;i++){
+        stars.push({ x:rnd()*W, y:rnd()*H, z:.35+rnd()*.65, r:.7+rnd()*1.8,
+          vx:(rnd()-.5)*.08, vy:(rnd()-.5)*.08, red:i%7===0, tw:rnd()*Math.PI*2 });
+      }
+    }
+    var host = canvas.parentElement;
+    host.addEventListener('pointermove', function(e){
+      var r = host.getBoundingClientRect();
+      tx = ((e.clientX - r.left)/r.width - .5) * 26;
+      ty = ((e.clientY - r.top)/r.height - .5) * 18;
+    });
+    host.addEventListener('pointerleave', function(){ tx = 0; ty = 0; });
+
+    var t = 0;
+    function draw(){
+      t += .016;
+      px += (tx - px)*.05; py += (ty - py)*.05;
+      ctx.clearRect(0,0,W,H);
+      var maxD = Math.min(W,H)*.3;
+      for(var i=0;i<stars.length;i++){
+        var a = stars[i];
+        a.x += a.vx; a.y += a.vy;
+        if(a.x<0||a.x>W) a.vx*=-1;
+        if(a.y<0||a.y>H) a.vy*=-1;
+      }
+      // links
+      for(var i2=0;i2<stars.length;i2++){
+        for(var j=i2+1;j<stars.length;j++){
+          var a2=stars[i2], b=stars[j];
+          var dx=a2.x-b.x, dy=a2.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+          if(d<maxD){
+            var op=(1-d/maxD)*.22;
+            ctx.strokeStyle = (a2.red||b.red) ? 'rgba(226,69,58,'+(op*1.4)+')' : 'rgba(255,255,255,'+op*.5+')';
+            ctx.lineWidth = .7;
+            ctx.beginPath();
+            ctx.moveTo(a2.x+px*a2.z, a2.y+py*a2.z);
+            ctx.lineTo(b.x+px*b.z, b.y+py*b.z);
+            ctx.stroke();
+          }
+        }
+      }
+      // stars
+      for(var k=0;k<stars.length;k++){
+        var n=stars[k];
+        var twinkle = .55 + Math.sin(t*1.4 + n.tw)*.35;
+        var X = n.x+px*n.z, Y = n.y+py*n.z;
+        ctx.beginPath();
+        ctx.arc(X, Y, n.red ? n.r*1.9 : n.r, 0, Math.PI*2);
+        ctx.fillStyle = n.red ? 'rgba(226,69,58,'+(.65*twinkle+.3)+')' : 'rgba(255,255,255,'+(.5*twinkle)+')';
+        ctx.fill();
+        if(n.red){
+          var g = ctx.createRadialGradient(X,Y,0,X,Y,n.r*9);
+          g.addColorStop(0,'rgba(226,69,58,.28)'); g.addColorStop(1,'rgba(226,69,58,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(X,Y,n.r*9,0,Math.PI*2); ctx.fill();
+        }
+      }
+      if(!reduceM) requestAnimationFrame(draw);
+    }
+    var ro = new ResizeObserver(function(){ resize(); seed(); if(reduceM) draw(); });
+    ro.observe(host);
+    resize(); seed(); draw();
   })();
 
   // Splash de entrada (breve, respeta reduced-motion). Blindado: si algo
