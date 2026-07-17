@@ -96,7 +96,23 @@
   .sec-head .lead{margin-top:18px}
 
   /* Hero */
-  .hero{padding:clamp(58px,7vw,96px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
+  .hero{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 0 84px;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg canvas{position:absolute;inset:0;width:100%;height:100%}
+  .hero-scrim{position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg, color-mix(in oklch,var(--canvas) 92%,transparent) 0%, color-mix(in oklch,var(--canvas) 60%,transparent) 44%, transparent 78%),
+               linear-gradient(0deg, var(--canvas) 0%, transparent 26%),
+               linear-gradient(180deg, color-mix(in oklch,var(--canvas) 70%,transparent) 0%, transparent 18%)}
+  .hero-content{position:relative;z-index:2;width:100%}
+  .hero-content h1{max-width:15ch}
+  .hero-foot{position:relative;z-index:2;width:100%}
+  .scroll-cue{position:absolute;left:50%;bottom:24px;z-index:3;width:40px;height:40px;
+    border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--muted);
+    transform:translateX(-50%);animation:cueFloat 2.6s ease-in-out infinite;transition:color .2s,border-color .2s}
+  .scroll-cue:hover{color:var(--ink);border-color:var(--ink)}
+  .scroll-cue svg{width:15px;height:15px}
+  @keyframes cueFloat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
   .hero:before{content:"";position:absolute;inset:0;z-index:-1;
     background:radial-gradient(70% 60% at 82% 8%, var(--red-tint) 0%, transparent 60%)}
   .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(40px,5vw,70px);align-items:center}
@@ -314,21 +330,23 @@
   body.splashing{overflow:hidden}
 
   /* Reveal */
-  .rev{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .rev{opacity:0;transform:translateY(36px);filter:blur(7px);
+    transition:opacity .85s var(--ease),transform .85s var(--ease),filter .85s var(--ease)}
   .rev .olist li,.rev .kpis li,.rev .bar-row,.rev .reason,.rev .contact-opts .copt{
-    opacity:0;transform:translateY(16px);
-    transition:opacity .55s var(--ease),transform .55s var(--ease)}
+    opacity:0;transform:translateY(22px);
+    transition:opacity .65s var(--ease),transform .65s var(--ease)}
   .rev.in .olist li,.rev.in .kpis li,.rev.in .bar-row,.rev.in .reason,.rev.in .contact-opts .copt{opacity:1;transform:none}
   .rev.in .olist li:nth-child(1),.rev.in .kpis li:nth-child(1),.rev.in .bar-row:nth-child(1),.rev.in .reason:nth-child(1),.rev.in .copt:nth-child(1){transition-delay:.08s}
   .rev.in .olist li:nth-child(2),.rev.in .kpis li:nth-child(2),.rev.in .bar-row:nth-child(2),.rev.in .reason:nth-child(2),.rev.in .copt:nth-child(2){transition-delay:.16s}
   .rev.in .olist li:nth-child(3),.rev.in .kpis li:nth-child(3),.rev.in .bar-row:nth-child(3),.rev.in .reason:nth-child(3),.rev.in .copt:nth-child(3){transition-delay:.24s}
   .rev.in .olist li:nth-child(4),.rev.in .kpis li:nth-child(4),.rev.in .bar-row:nth-child(4){transition-delay:.32s}
-  .rev.in{opacity:1;transform:none}
+  .rev.in{opacity:1;transform:none;filter:none}
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .rev{opacity:1;transform:none;transition:none}
+    .rev{opacity:1;transform:none;filter:none;transition:none}
     .rev .olist li,.rev .kpis li,.rev .bar-row,.rev .reason,.rev .contact-opts .copt{opacity:1;transform:none;transition:none}
     .fill{transition:none}
+    .scroll-cue{animation:none}
     .hero-visual .glow{animation:none}
   }
 
@@ -404,7 +422,11 @@
 </header>
 
 <section class="hero" id="inicio">
-  <div class="wrap hero-grid">
+  <div class="hero-bg" aria-hidden="true">
+    <canvas id="networkCanvas" class="network-canvas"></canvas>
+    <span class="hero-scrim"></span>
+  </div>
+  <div class="wrap hero-content">
     <div class="rev">
       <span class="eyebrow">Aprendizaje organizacional de próxima generación</span>
       <h1>No diseñamos cursos, <em>transformamos</em> cómo aprende tu organización.</h1>
@@ -417,20 +439,18 @@
         <a class="btn btn--ghost" href="#servicios">Ver servicios</a>
       </div>
     </div>
-    <div class="hero-visual rev" aria-hidden="true">
-      <span class="glow"></span>
-      <canvas id="networkCanvas" class="network-canvas"></canvas>
-      <div class="hero-chip"><b class="num">+100</b><span>Proyectos estratégicos entregados</span></div>
-    </div>
   </div>
-  <div class="wrap">
+  <div class="wrap hero-foot">
     <div class="hero-metrics rev">
+      <div class="metric"><b class="num">+100</b><span>Proyectos estratégicos</span></div>
       <div class="metric"><b class="num">50k+</b><span>Personas formadas</span></div>
       <div class="metric"><b class="num">20+</b><span>Años de experiencia</span></div>
       <div class="metric"><b class="num">98%</b><span>Satisfacción de clientes</span></div>
-      <div class="metric"><b class="num">24/7</b><span>Soporte estratégico</span></div>
     </div>
   </div>
+  <a class="scroll-cue" href="#servicios" aria-label="Bajar a servicios">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
 </section>
 
 <section class="alt" id="servicios">
@@ -742,8 +762,8 @@
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
     var nodes = [];
-    var NODE_COUNT = 22;
-    var LINK_DIST = 0.34; // fraction of min(W,H)
+    var NODE_COUNT = 46;
+    var LINK_DIST = 0.21; // fraction of min(W,H)
     var redInk = getComputedStyle(document.documentElement).getPropertyValue('--red').trim() || '#e2453a';
     var lineInk = getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || '#4a5164';
     var mouse = {x:0, y:0, on:false};
